@@ -10,7 +10,7 @@ const tabs = [
     label: 'SaaS Development',
     icon: 'cloud_sync',
     headline: 'SaaS Development',
-    body: 'We architect end-to-end multi-tenant platforms built for scale. From billing & auth to role-based dashboards, our SaaS foundations are engineered to grow with your user base — and your revenue.',
+    body: 'We architect end-to-end multi-tenant platforms built for scale. From billing & auth to role-based dashboards, our SaaS foundations are engineered to grow with your user base - and your revenue.',
     points: ['Multi-tenant architecture', 'Subscription & billing integration', 'Role-based access control', 'Usage analytics & metering'],
     stack: [
       { label: 'React', icon: '⚛' },
@@ -26,7 +26,7 @@ const tabs = [
     label: 'Custom Software',
     icon: 'code_blocks',
     headline: 'Custom Software',
-    body: 'Bespoke applications engineered around your exact operational constraints. We reject generic templates and build precise tools that solve the problem you actually have — not one that fits a pre-packaged solution.',
+    body: 'Bespoke applications engineered around your exact operational constraints. We reject generic templates and build precise tools that solve the problem you actually have - not one that fits a pre-packaged solution.',
     points: ['Domain-specific tooling', 'Legacy system modernisation', 'API-first architecture', 'Thorough documentation'],
     stack: [
       { label: 'Python', icon: '🐍' },
@@ -74,7 +74,7 @@ const tabs = [
     label: 'AI / ML Development',
     icon: 'psychology',
     headline: 'AI / ML Development',
-    body: 'We build intelligent systems that go beyond demos — production-grade AI features embedded into your product. From LLM-powered workflows to custom ML models, we ship AI that actually delivers value.',
+    body: 'We build intelligent systems that go beyond demos - production-grade AI features embedded into your product. From LLM-powered workflows to custom ML models, we ship AI that actually delivers value.',
     points: ['LLM integration & fine-tuning', 'RAG pipelines', 'ML model development', 'AI-powered automation'],
     stack: [
       { label: 'OpenAI', icon: '🤖' },
@@ -85,32 +85,6 @@ const tabs = [
       { label: 'HuggingFace', icon: '🤗' },
     ],
   },
-  {
-    id: 'academic',
-    label: 'Academic Support',
-    icon: 'school',
-    headline: 'Academic & Professional Support',
-    body: 'A specialized vertical for students, researchers, and professionals who need technical clarity. We bridge the gap between conceptual frameworks and practical, working solutions.',
-    points: ['Coding guidance & mentoring', 'MBA & research project support', 'Concept explanation & documentation', 'Structured learning programmes'],
-    stack: [
-      { label: 'Python', icon: '🐍' },
-      { label: 'R', icon: '📊' },
-      { label: 'MATLAB', icon: '📐' },
-      { label: 'Excel', icon: '📋' },
-      { label: 'Tableau', icon: '📈' },
-      { label: 'SPSS', icon: '🔬' },
-    ],
-  },
-]
-
-/* ── Bento Data ────────────────────────────────────── */
-const academicServices = [
-  { icon: 'terminal', label: 'Coding Guidance' },
-  { icon: 'payments', label: 'MBA Projects' },
-  { icon: 'psychology', label: 'Mentoring' },
-  { icon: 'query_stats', label: 'Research Support' },
-  { icon: 'lightbulb', label: 'Concept Assistance' },
-  { icon: 'school', label: 'Structured Learning' },
 ]
 
 const edge = [
@@ -125,7 +99,7 @@ export default function Services() {
   const active = tabs.find((t) => t.id === activeTab)
 
   return (
-    <div className="bg-background text-on-surface font-body">
+    <div id="main-content" className="bg-background text-on-surface font-body">
       <Nav />
 
       {/* Page Hero */}
@@ -138,7 +112,7 @@ export default function Services() {
             Our Core Ecosystem
           </h1>
           <p className="text-on-surface-variant text-lg font-light max-w-2xl">
-            A curated range of technical services designed for high-impact execution — from platform architecture to academic guidance.
+            A focused range of digital services designed for high-impact execution - from product strategy and platform architecture to automation and applied AI.
           </p>
         </div>
       </section>
@@ -212,27 +186,6 @@ export default function Services() {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Academic Support */}
-      <section className="py-24 px-8 bg-surface-container-lowest">
-        <div className="max-w-7xl mx-auto text-center mb-16">
-          <span className="text-primary font-label tracking-widest text-xs font-semibold uppercase mb-4 block">
-            Specialized Vertical
-          </span>
-          <h2 className="font-headline text-3xl font-bold text-on-surface">Academic &amp; Professional Support</h2>
-          <p className="text-on-surface-variant max-w-2xl mx-auto mt-4 font-light">
-            Bridging the gap between conceptual learning and technical application.
-          </p>
-        </div>
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {academicServices.map(({ icon, label }) => (
-            <div key={label} className="p-6 bg-surface-container-low/50 rounded-2xl text-center group hover:bg-white hover:shadow-lg transition-all">
-              <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-3xl mb-3 block">{icon}</span>
-              <span className="text-sm font-semibold text-on-surface leading-tight block">{label}</span>
-            </div>
-          ))}
         </div>
       </section>
 

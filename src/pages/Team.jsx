@@ -4,58 +4,49 @@ import Footer from '../components/Footer'
 
 const team = [
   {
-    name: 'Arjun Mehta',
-    role: 'Founder & CEO',
-    icon: 'person',
+    name: 'Manan Patel',
+    role: 'Co-Founder & Software Engineer',
+    icon: 'terminal',
     color: 'bg-primary/10',
     iconColor: 'text-primary',
-    bio: 'Full-stack engineer turned entrepreneur. Arjun founded WorkAidly to bridge the gap between ambitious ideas and reliable digital execution. He leads product strategy and client relationships.',
-    skills: ['Product Strategy', 'Client Relations', 'Full-Stack Dev'],
+    bio: 'Manan is a co-founder of WorkAidly and a full-stack engineer focused on turning ideas into practical, dependable digital products. Alongside WorkAidly, he works as a Programmer at the INFLIBNET Centre, a Government of India institution.',
+    skills: ['Full-Stack Development', 'Product Engineering', 'Technical Strategy'],
   },
   {
-    name: 'Priya Sharma',
-    role: 'Lead Software Engineer',
-    icon: 'code',
+    name: 'Prakhyat Srivastava',
+    role: 'Co-Founder & Data Analyst',
+    icon: 'analytics',
     color: 'bg-secondary/10',
     iconColor: 'text-secondary',
-    bio: 'With 8+ years in enterprise software, Priya architechts the backbone of every platform we build. Her obsession with clean, scalable code is contagious across the team.',
-    skills: ['Backend Systems', 'API Design', 'DevOps'],
+    bio: 'Prakhyat co-founded WorkAidly and brings a data-informed perspective to the products and systems we build. He works as a Data Analyst at Q-Line Biotech, combining analytical thinking with a strong understanding of software and business requirements.',
+    skills: ['Data Analysis', 'Software Systems', 'Business Intelligence'],
   },
   {
-    name: 'Zara Ahmed',
-    role: 'UX & Design Lead',
-    icon: 'palette',
+    name: 'Kartikey Mishra',
+    role: 'Full-Stack Engineer',
+    icon: 'code_blocks',
     color: 'bg-tertiary/10',
     iconColor: 'text-tertiary',
-    bio: 'Zara brings an editorial eye to every interface. Previously at leading design agencies, she ensures every pixel at WorkAidly serves a purpose — and looks exceptional doing it.',
-    skills: ['UI/UX Design', 'Design Systems', 'User Research'],
+    bio: 'Kartikey is a full-stack engineer who works across interfaces, application logic, and the systems that connect them. He also works at QuickSell, where he contributes to building and improving production-ready software experiences.',
+    skills: ['Full-Stack Development', 'Frontend Engineering', 'Backend Systems'],
   },
   {
-    name: 'Marcus Chen',
-    role: 'SaaS Architect',
-    icon: 'cloud',
+    name: 'Sarthak Seth',
+    role: 'Frontend Developer',
+    icon: 'web',
     color: 'bg-primary/10',
     iconColor: 'text-primary',
-    bio: 'Marcus specialises in multi-tenant SaaS infrastructure. From authentication flows to billing systems, he engineers the invisible systems that keep platforms running at scale.',
-    skills: ['SaaS Architecture', 'Cloud Infrastructure', 'Security'],
+    bio: 'Sarthak works as a Frontend Developer at PriceLabs, building clear and reliable user-facing experiences for complex products. His experience strengthens WorkAidly’s approach to interface engineering, usability, and production-ready frontend delivery.',
+    skills: ['Frontend Development', 'UI Engineering', 'Web Performance'],
   },
   {
-    name: 'Aisha Patel',
-    role: 'Academic Support Lead',
-    icon: 'school',
-    color: 'bg-secondary/10',
-    iconColor: 'text-secondary',
-    bio: 'An MBA graduate and former educator, Aisha heads our specialized academic vertical. She connects complex technical concepts to real-world business problems with rare clarity.',
-    skills: ['Research & Analysis', 'Mentoring', 'Business Strategy'],
-  },
-  {
-    name: 'Liam Torres',
-    role: 'Automation Engineer',
-    icon: 'hub',
+    name: 'Ratnesh Patel',
+    role: 'Marketing & Client Relations Lead',
+    icon: 'campaign',
     color: 'bg-tertiary/10',
     iconColor: 'text-tertiary',
-    bio: "Liam lives at the intersection of tools, APIs, and workflows. If there's a repetitive process in your business, he'll find a way to make it disappear — elegantly.",
-    skills: ['Workflow Automation', 'API Integration', 'No-Code/Low-Code'],
+    bio: 'Ratnesh leads marketing and client relationships at WorkAidly, drawing on his previous experience as a Product Manager at PhoneOn. He helps connect business requirements with clear product priorities and keeps communication aligned throughout an engagement.',
+    skills: ['Client Relations', 'Product Management', 'Go-to-Market Strategy'],
   },
 ]
 
@@ -68,7 +59,7 @@ const values = [
 
 export default function Team() {
   return (
-    <div className="bg-background text-on-surface font-body">
+    <div id="main-content" className="bg-background text-on-surface font-body">
       <Nav />
 
       {/* Page Hero */}
@@ -82,7 +73,7 @@ export default function Team() {
             <span className="text-primary italic font-medium">WorkAidly</span>
           </h1>
           <p className="text-on-surface-variant text-lg font-light max-w-2xl">
-            A small, deliberate team of engineers, designers, and strategists united by one goal — delivering digital solutions that actually work.
+            A focused team of engineers, analysts, product thinkers, and client partners united by one goal - delivering digital solutions that actually work.
           </p>
         </div>
       </section>
@@ -137,7 +128,7 @@ export default function Team() {
               What Drives Us
             </span>
             <h2 className="font-headline text-4xl font-bold leading-tight">
-              Our values aren't on a wall — they're in our work.
+              Our values aren't on a wall - they're in our work.
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -165,7 +156,7 @@ export default function Team() {
             <span className="text-primary">right conversation</span>.
           </h2>
           <p className="text-on-surface-variant text-lg font-light mb-12 max-w-2xl mx-auto">
-            Whether you have a project in mind or just want to explore possibilities — our team is ready to listen.
+            Whether you have a project in mind or just want to explore possibilities - our team is ready to listen.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

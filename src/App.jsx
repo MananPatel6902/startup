@@ -8,6 +8,7 @@ import Contact from './pages/Contact'
 export default function App() {
   return (
     <BrowserRouter>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />

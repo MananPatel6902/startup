@@ -3,24 +3,24 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
 const steps = [
-  { icon: 'search', title: 'Discover', sub: 'Audit & Scope', desc: 'We start by deeply understanding your current state — auditing your existing systems, workflows, and pain points to scope the right engagement.' },
+  { icon: 'search', title: 'Discover', sub: 'Audit & Scope', desc: 'We start by deeply understanding your current state - auditing your existing systems, workflows, and pain points to scope the right engagement.' },
   { icon: 'forum', title: 'Understand', sub: 'Strategy Alignment', desc: 'Through structured sessions, we align on your goals, constraints, and success metrics. Strategy before execution.' },
   { icon: 'edit_note', title: 'Plan', sub: 'Architecture', desc: 'We design the technical architecture and project roadmap, breaking work into clear, deliverable milestones.' },
   { icon: 'palette', title: 'Design', sub: 'Visual & UX', desc: 'Pixel-perfect interfaces grounded in user research. We design experiences that feel intuitive and intentional.' },
-  { icon: 'rocket_launch', title: 'Build', sub: 'Engineering', desc: 'Clean, documented, maintainable code. We build fast without cutting corners — tested and reviewed at every step.' },
+  { icon: 'rocket_launch', title: 'Build', sub: 'Engineering', desc: 'Clean, documented, maintainable code. We build fast without cutting corners - tested and reviewed at every step.' },
   { icon: 'support_agent', title: 'Support', sub: 'Lifecycle Growth', desc: "Post-launch isn't the end. We provide ongoing support, monitoring, and iterative improvements as your product scales." },
 ]
 
 const principles = [
   { icon: 'visibility', title: 'Full Transparency', desc: 'You get access to progress reports, live staging environments, and direct communication with the team at every stage.' },
-  { icon: 'timer', title: 'Velocity Without Compromise', desc: "We move fast because we've refined our process — not because we skip steps. Quality is non-negotiable." },
+  { icon: 'timer', title: 'Velocity Without Compromise', desc: "We move fast because we've refined our process - not because we skip steps. Quality is non-negotiable." },
   { icon: 'sync', title: 'Iterative by Design', desc: 'Every project is built to evolve. We structure work in phases that deliver value incrementally.' },
   { icon: 'handshake', title: 'True Partnership', desc: "We treat your project as if it's our own. Your success metrics are our success metrics." },
 ]
 
 export default function Process() {
   return (
-    <div className="bg-background text-on-surface font-body">
+    <div id="main-content" className="bg-background text-on-surface font-body">
       <Nav />
 
       {/* Page Hero */}

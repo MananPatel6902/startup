@@ -3,339 +3,455 @@ import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
-const projects = [
+const capabilities = [
+  { icon: 'cloud_sync', label: 'SaaS products' },
+  { icon: 'web', label: 'Web experiences' },
+  { icon: 'code_blocks', label: 'Custom software' },
+  { icon: 'hub', label: 'Automation' },
+  { icon: 'psychology', label: 'Applied AI' },
+]
+
+const services = [
   {
-    id: 1,
-    tags: ['SAAS', 'WEB'],
-    name: 'FlowDesk',
-    tagline: 'Next-gen project management for distributed teams',
-    bg: 'from-indigo-900 to-violet-950',
-    accent: '#c3c0ff',
-    icon: 'dashboard',
+    number: '01',
+    icon: 'cloud_sync',
+    title: 'SaaS products',
+    description: 'Multi-tenant platforms designed around a clear product model, dependable architecture, and room to scale.',
+    tags: ['Product strategy', 'UX systems', 'Full-stack build'],
+    featured: true,
   },
   {
-    id: 2,
-    tags: ['EDTECH', 'WEB'],
-    name: 'StudyThread',
-    tagline: "Australia's leading adaptive learning platform",
-    bg: 'from-slate-800 to-indigo-900',
-    accent: '#ffb695',
-    icon: 'school',
+    number: '02',
+    icon: 'web',
+    title: 'Web experiences',
+    description: 'High-conversion websites and web apps where narrative, usability, and performance work together.',
+    tags: ['Web design', 'Development'],
   },
   {
-    id: 3,
-    tags: ['AUTOMATION', 'AI'],
-    name: 'OpsLink',
-    tagline: 'AI-powered workflow automation for SMEs',
-    bg: 'from-violet-950 to-purple-900',
-    accent: '#c3c0ff',
+    number: '03',
+    icon: 'code_blocks',
+    title: 'Custom software',
+    description: 'Purpose-built internal tools and operational platforms shaped around how your team actually works.',
+    tags: ['System design', 'Engineering'],
+  },
+  {
+    number: '04',
     icon: 'hub',
-  },
-  {
-    id: 4,
-    tags: ['HOSPITALITY', 'WEB'],
-    name: 'GuestBrief',
-    tagline: 'Discover a better way to enhance your guest experience',
-    bg: 'from-amber-900 to-orange-950',
-    accent: '#ffb695',
-    icon: 'hotel',
-  },
-  {
-    id: 5,
-    tags: ['FINTECH', 'SAAS'],
-    name: 'PayFlow',
-    tagline: 'Intelligent invoicing & payment orchestration platform',
-    bg: 'from-emerald-900 to-teal-950',
-    accent: '#c3c0ff',
-    icon: 'payments',
+    title: 'Automation & AI',
+    description: 'Connected workflows and practical intelligence that remove repetition without creating new complexity.',
+    tags: ['Integrations', 'Applied AI'],
   },
 ]
 
-export default function Home() {
-  const [activeSlide, setActiveSlide] = useState(1)
+const projects = [
+  {
+    id: 'flowdesk',
+    index: '01',
+    eyebrow: 'SaaS · Product design',
+    name: 'FlowDesk',
+    statement: 'One calm workspace for distributed teams to plan, align, and deliver.',
+    metricLabel: 'Core outcome',
+    metric: 'Clarity at scale',
+    tone: 'indigo',
+    icon: 'dashboard',
+    columns: [
+      { label: 'To plan', items: ['Research synthesis', 'Release brief'] },
+      { label: 'In progress', items: ['Dashboard system', 'Team roles'] },
+      { label: 'Complete', items: ['Product strategy', 'User journeys'] },
+    ],
+  },
+  {
+    id: 'opslink',
+    index: '02',
+    eyebrow: 'Automation · Applied AI',
+    name: 'OpsLink',
+    statement: 'An intelligent operations layer that keeps tools, data, and teams in sync.',
+    metricLabel: 'Core outcome',
+    metric: 'Connected operations',
+    tone: 'teal',
+    icon: 'hub',
+    columns: [
+      { label: 'Signals', items: ['New opportunity', 'Support request'] },
+      { label: 'Automations', items: ['Enrich & route', 'Create workflow'] },
+      { label: 'Outcomes', items: ['Team notified', 'Record updated'] },
+    ],
+  },
+  {
+    id: 'guestbrief',
+    index: '03',
+    eyebrow: 'Hospitality · Web platform',
+    name: 'GuestBrief',
+    statement: 'A more thoughtful digital guest journey, from first booking to final follow-up.',
+    metricLabel: 'Core outcome',
+    metric: 'Better guest journeys',
+    tone: 'violet',
+    icon: 'hotel',
+    columns: [
+      { label: 'Before stay', items: ['Welcome guide', 'Preferences'] },
+      { label: 'During stay', items: ['Local services', 'Live requests'] },
+      { label: 'After stay', items: ['Feedback loop', 'Return offer'] },
+    ],
+  },
+]
 
-  const prev = () => setActiveSlide((s) => (s - 1 + projects.length) % projects.length)
-  const next = () => setActiveSlide((s) => (s + 1) % projects.length)
+const process = [
+  { number: '01', title: 'Frame the right problem', body: 'We align on the commercial goal, user need, and technical constraints before choosing a solution.' },
+  { number: '02', title: 'Shape the experience', body: 'Flows, interfaces, and architecture evolve together so the product feels coherent from every angle.' },
+  { number: '03', title: 'Build in clear cycles', body: 'You see working progress early and often, with decisions documented and quality built into delivery.' },
+  { number: '04', title: 'Launch, learn, improve', body: 'We stay close after release, using real signals to strengthen the product and plan what comes next.' },
+]
 
-  const getPos = (idx) => {
-    const diff = (idx - activeSlide + projects.length) % projects.length
-    if (diff === 0) return 'center'
-    if (diff === 1 || diff === projects.length - 4) return 'right'
-    if (diff === projects.length - 1 || diff === 4) return 'left'
-    return 'hidden'
-  }
+const iconPaths = {
+  cloud_sync: 'M6.5 18.5h10a4 4 0 0 0 .8-7.92A6 6 0 0 0 5.85 9.5 4.5 4.5 0 0 0 6.5 18.5Zm3-4 2 2 3.5-4M15 9.5l-2-2-3.5 4',
+  web: 'M3.5 5.5h17v13h-17zM3.5 9h17M7 7.2h.01M10 7.2h.01',
+  code_blocks: 'm8 8-4 4 4 4m8-8 4 4-4 4m-2.5-10-3 12',
+  hub: 'M12 8v4m0 0-5 3m5-3 5 3M12 4a2 2 0 1 0 0 .01M7 15a2 2 0 1 0 0 .01M17 15a2 2 0 1 0 0 .01',
+  psychology: 'M9.5 18.5h5m-4 2h3M8 15.5c-1.5-1.1-2.5-3-2.5-5a6.5 6.5 0 0 1 13 0c0 2-1 3.9-2.5 5-.8.6-1.2 1.2-1.3 2H9.3c-.1-.8-.5-1.4-1.3-2Z',
+  dashboard: 'M4 4h7v7H4zm9 0h7v4h-7zm0 6h7v10h-7zM4 13h7v7H4z',
+  hotel: 'M5 20V5h10v15M9 8h2m-2 3h2m-2 3h2m4-5h4v11H3m12-7h2m-2 3h2',
+  space_dashboard: 'M4 4h7v8H4zm9 0h7v5h-7zm0 7h7v9h-7zM4 14h7v6H4z',
+  account_tree: 'M6 5v7m0 0h11m-5 0V8m5 4v4M4 3h4v4H4zm6 3h4v4h-4zm5 8h4v4h-4z',
+  data_object: 'M8 4C5 4 4 6 4 8s1 4 4 4m8-8c3 0 4 2 4 4s-1 4-4 4M8 12c-3 0-4 2-4 4s1 4 4 4m8-8c3 0 4 2 4 4s-1 4-4 4',
+  monitoring: 'M4 18V9m5 9V5m5 13v-6m5 6V3',
+  lightbulb: 'M9 18h6m-5 2h4M8 15c-1.2-1-2-2.5-2-4.2a6 6 0 0 1 12 0c0 1.7-.8 3.2-2 4.2-.7.6-1 1.1-1 2H9c0-.9-.3-1.4-1-2Z',
+  draw: 'm5 18 1-4L16 4l4 4-10 10-5 1Zm9-12 4 4',
+  code: 'm8 7-5 5 5 5m8-10 5 5-5 5m-2.5-12-3 14',
+  rocket_launch: 'M14 5c3-2 5-2 5-2s0 2-2 5l-4 4-5-1-1-5 4-4 3 3ZM8 12l-3 1-2 4 5-2m4 1-1 5 4-2 1-3M6 18l-2 2',
+  check_circle: 'M20 11a8 8 0 1 1-4.5-7.2M8 11.5l2.5 2.5L20 4.5',
+  auto_awesome: 'm12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM6 13l.8 2.2L9 16l-2.2.8L6 19l-.8-2.2L3 16l2.2-.8L6 13Zm11 1 .8 2.2L20 17l-2.2.8L17 20l-.8-2.2L14 17l2.2-.8L17 14Z',
+}
+
+function Icon({ name, className = '' }) {
   return (
-    <div className="bg-background text-on-surface font-body">
+    <svg className={`ui-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={iconPaths[name] ?? iconPaths.auto_awesome} />
+    </svg>
+  )
+}
+
+function WorkflowPreview({ project }) {
+  return (
+    <div className={`work-preview work-preview-${project.tone}`}>
+      <div className="preview-topbar">
+        <div className="preview-brand">
+          <span className="preview-logo"><i /><i /><i /></span>
+          <span>{project.name}</span>
+        </div>
+        <div className="preview-status"><span /> Live workspace</div>
+      </div>
+      <div className="preview-body">
+        <aside className="preview-sidebar" aria-hidden="true">
+          <span className="active" />
+          <span />
+          <span />
+          <span />
+        </aside>
+        <div className="preview-content">
+          <div className="preview-heading">
+            <div>
+              <small>Workspace</small>
+              <strong>Delivery overview</strong>
+            </div>
+            <button type="button" tabIndex="-1">+ Add item</button>
+          </div>
+          <div className="preview-columns">
+            {project.columns.map((column, columnIndex) => (
+              <div className="preview-column" key={column.label}>
+                <div className="preview-column-title">
+                  <span>{column.label}</span>
+                  <small>0{columnIndex + 2}</small>
+                </div>
+                {column.items.map((item, itemIndex) => (
+                  <div className="preview-task" key={item}>
+                    <span className={`preview-task-icon icon-${itemIndex}`} />
+                    <p>{item}</p>
+                    <div className="preview-task-meta"><i /><i /></div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function Home() {
+  const [activeProject, setActiveProject] = useState(projects[0].id)
+  const selectedProject = projects.find((project) => project.id === activeProject) ?? projects[0]
+
+  return (
+    <div className="home-page">
       <Nav />
 
-      {/* Hero */}
-      <section className="relative pt-40 pb-20 md:pt-56 md:pb-32 overflow-hidden px-8">
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-          <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-            <path d="M-100,200 C200,150 400,450 600,300 S900,100 1100,250" fill="none" stroke="#c3c0ff" strokeWidth="0.5"/>
-            <path d="M-100,500 C150,550 450,250 700,450 S950,600 1100,550" fill="none" stroke="#c3c0ff" strokeWidth="0.5"/>
-            <path d="M-100,800 C300,700 500,900 800,750 S1000,600 1100,700" fill="none" stroke="#c3c0ff" strokeWidth="0.5"/>
-          </svg>
-        </div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="max-w-3xl">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary-container/10 text-primary text-xs font-label tracking-widest font-semibold mb-6">
-              REDEFINING EXECUTION
-            </span>
-            <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tight text-on-surface leading-[1.1] mb-8">
-              One partner for{' '}
-              <span className="text-primary italic font-medium">digital solutions</span>,
-              built around your needs.
-            </h1>
-            <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-10 max-w-2xl font-light">
-              WorkAidly builds SaaS products, custom software, websites, automation systems, and tailored digital solutions for businesses and individuals who need reliable execution.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <Link
-                to="/contact"
-                className="px-8 py-4 bg-primary text-on-primary rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-primary/20 transition-all flex items-center gap-2"
-              >
-                Book a Consultation
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
-              <Link
-                to="/services"
-                className="px-8 py-4 text-on-surface font-semibold text-lg hover:bg-surface-container-low transition-all rounded-xl"
-              >
-                Explore Services
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <main id="main-content" tabIndex="-1">
+        <section className="home-hero">
+          <div className="hero-grid" aria-hidden="true" />
+          <div className="hero-glow hero-glow-one" aria-hidden="true" />
+          <div className="hero-glow hero-glow-two" aria-hidden="true" />
 
-      {/* Brand Intro */}
-      <section className="py-24 px-8 bg-surface-container-low/30">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative aspect-square md:aspect-video rounded-3xl overflow-hidden group shadow-2xl">
-            <img
-              alt="Modern architectural workspace"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuColJQfDj75CqJa7HEGS_XdFzyGIhNm22Yo4Hp9c2O9uDjRU5Ii7hRiX2vTpgzTfMPi5K8GxIncMSl977JQkdm_tW9JkWUWBG1jJXPLyHxTPt7ugy9JnEuD9j01-EZwwYRw7S54axO8Hk6IdW1n-ZSg2_f_dyZtPx-5--ZkGMB1Hj0GUG0TIXN_rk6qRyrGRI0YMCnkD74K--QxKdgNSUjFUkZuDdaI3W9zQGzDB6G2C78gAJXp5gL2triSj9l1Yfo68xPFf8NJrfSy"
-            />
-          </div>
-          <div>
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-6 leading-tight">
-              Adaptable. Credible.<br />Solution-First.
-            </h2>
-            <div className="space-y-6 text-on-surface-variant leading-relaxed text-lg font-light">
-              <p>WorkAidly emerged from a foundation of specialized support to become a full-spectrum digital partner. We don't just build; we solve.</p>
-              <p>In a world of fragmented services, we act as the connective tissue between your ideas and their digital reality. Our approach is rooted in technical excellence and the understanding that every business requires a unique thread of strategy.</p>
-            </div>
-            <Link to="/team" className="inline-flex items-center gap-2 mt-8 text-primary font-semibold hover:gap-3 transition-all">
-              Meet the team
-              <span className="material-symbols-outlined text-lg">arrow_forward</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Teaser */}
-      <section className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-xl">
-              <h2 className="font-headline text-4xl font-bold text-on-surface mb-4">Core Ecosystem</h2>
-              <p className="text-on-surface-variant text-lg font-light">A curated range of technical services designed for high-impact execution.</p>
-            </div>
-            <Link to="/services" className="flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all whitespace-nowrap">
-              View all services
-              <span className="material-symbols-outlined text-lg">arrow_forward</span>
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 p-10 bg-surface-container-lowest rounded-3xl group hover:bg-primary transition-all duration-500">
-              <div className="w-12 h-12 bg-primary/10 group-hover:bg-white/20 rounded-xl flex items-center justify-center mb-8 transition-colors">
-                <span className="material-symbols-outlined text-primary group-hover:text-white">cloud_sync</span>
+          <div className="home-container hero-layout">
+            <div className="hero-copy">
+              <div className="hero-eyebrow">
+                <span className="eyebrow-pulse" />
+                Digital product partner
+                <span className="eyebrow-rule" />
               </div>
-              <h3 className="font-headline text-2xl font-bold text-on-surface group-hover:text-white mb-4">SaaS Development</h3>
-              <p className="text-on-surface-variant group-hover:text-white/80 text-lg font-light leading-relaxed">End-to-end multi-tenant platform architecture. We build scalable, secure, and user-centric subscription models that drive recurring value.</p>
-            </div>
-            <div className="p-10 bg-surface-container-low rounded-3xl hover:bg-surface-container transition-all">
-              <span className="material-symbols-outlined text-primary text-4xl mb-8 block">code_blocks</span>
-              <h3 className="font-headline text-2xl font-bold text-on-surface mb-4">Custom Software</h3>
-              <p className="text-on-surface-variant text-base font-light leading-relaxed">Bespoke applications designed to solve specific operational bottlenecks with precision engineering.</p>
-            </div>
-            <div className="p-10 bg-surface-container-low rounded-3xl hover:bg-surface-container transition-all">
-              <span className="material-symbols-outlined text-primary text-4xl mb-8 block">hub</span>
-              <h3 className="font-headline text-2xl font-bold text-on-surface mb-4">Automation</h3>
-              <p className="text-on-surface-variant text-base font-light leading-relaxed">Connect your disparate tools into a single, cohesive workflow that eliminates manual overhead.</p>
-            </div>
-            <div className="md:col-span-2 p-10 bg-[#fcf9f8] border border-outline-variant/30 rounded-3xl group hover:shadow-xl transition-all overflow-hidden relative">
-              <div className="relative z-10">
-                <span className="material-symbols-outlined text-primary text-4xl mb-8 block">web</span>
-                <h3 className="font-headline text-2xl font-bold text-on-surface mb-4">Website &amp; Web Apps</h3>
-                <p className="text-on-surface-variant text-lg font-light leading-relaxed max-w-md">From high-conversion landing pages to complex, data-driven web applications with pixel-perfect modern UX.</p>
-              </div>
-              <div className="absolute right-[-10%] bottom-[-20%] w-3/4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <img alt="UI Design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIv8xQ4vZf9_2zR0klckh8sb_NK60jTALEKJr1ReKIn9p2MD4uMJNSrrQ2Dj3xlj8tbFBE4MwSiXhmpGZjqdlXfJCZk3Cjb2DG6sX69ecbHosc0QQFhwbi4BeuptiH31EqwMEdQHhzOc2tuDOrJ4aAvBpmIeT1cIyUQ9_TQq_fQFCbfo6dxTq71hnNJNAOSJZxTa_9DEDY7ImTXC2Lms-PQJI7fKUUUZjwbB0twkHyvw4rxOUUpeaabu1txakPzo7ubva_JkYF3hlq" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solution-First */}
-      <section className="py-24 bg-on-surface text-surface overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="font-headline text-4xl md:text-6xl font-bold mb-10 leading-tight">
-                Built to adapt to what your business{' '}
-                <span className="text-secondary-fixed-dim italic">needs next.</span>
-              </h2>
-              <p className="text-surface-variant text-xl leading-relaxed font-light mb-12">
-                We don't believe in static solutions. Your digital infrastructure should breathe and grow as you do. Our strategy-first mindset ensures every line of code serves a future-proof purpose.
+              <h1>
+                Ideas become<br />
+                <em>useful digital</em><br />
+                products here.
+              </h1>
+              <p>
+                Strategy, design, and engineering in one focused team. We turn ambitious ideas into software people understand, trust, and use.
               </p>
-              <ul className="space-y-6 mb-10">
-                {['Strategic Technical Roadmapping', 'High-Velocity Execution Cycles', 'Cross-Domain Technical Expertise'].map((item) => (
-                  <li key={item} className="flex gap-4 items-start">
-                    <span className="material-symbols-outlined text-secondary-fixed-dim">check_circle</span>
-                    <span className="font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link to="/process" className="inline-flex items-center gap-2 text-secondary-fixed-dim font-semibold hover:gap-3 transition-all">
-                See our process
-                <span className="material-symbols-outlined text-lg">arrow_forward</span>
-              </Link>
+              <div className="hero-actions">
+                <Link to="/contact" className="button button-primary">
+                  Start a project <span aria-hidden="true">↗</span>
+                </Link>
+                <Link to="/services" className="button button-quiet">
+                  Explore our work <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+              <div className="hero-proof">
+                <div className="proof-avatars" aria-hidden="true">
+                  <span>ST</span><span>UX</span><span>EN</span>
+                </div>
+                <p><strong>One connected team</strong><br />Strategy · UX · Engineering</p>
+              </div>
             </div>
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-primary/20 blur-3xl group-hover:bg-primary/30 transition-all rounded-full" />
-              <img
-                alt="Cybersecurity and technology"
-                className="relative rounded-2xl w-full h-full object-cover grayscale brightness-125"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFe3EMVJKwje08ohXXbd2UBTt_IYFA7lvluunMDUQOwl4a1P3Af8IngDJD89EtPlEF7UbPXzWV0nj9uQoxgHNgtGwwYIIaY7Csw-XJC0qe1E_clgHA5rm9fvtIi_1CoY7WEpHjuXZ3A3TGkvwQLskuXayE5XllaOeO8nS2i4ZPxT6fJYsxXg1kqmP8KTw18NDWdag5P89KQjU-rBX61T8e0eG3E55JIa3snm0IIA7mkBvzu5ZtsJX9N5b0y2HfAyKfttY40B47LX-d"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Brand Promise */}
-      <section className="py-32 px-8 bg-surface-container-lowest overflow-hidden">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="w-16 h-0.5 bg-primary mx-auto mb-12" />
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-on-surface leading-tight">
-            WorkAidly <span className="text-primary">connects ideas</span>, systems, and execution into solutions that{' '}
-            <span className="italic underline decoration-primary-container decoration-4 underline-offset-8">actually work.</span>
-          </h2>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 mt-12 px-8 py-4 bg-primary text-on-primary rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-primary/20 transition-all"
-          >
-            Start a conversation
-            <span className="material-symbols-outlined">arrow_forward</span>
-          </Link>
-        </div>
-      </section>
-
-      {/* ── SECTION 2: Portfolio Slider ── */}
-      <section className="py-24 px-8 bg-surface-container-lowest overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="w-10 h-10 rounded-full bg-primary mx-auto mb-6 flex items-center justify-center">
-              <span className="material-symbols-outlined text-on-primary text-xl">work</span>
-            </div>
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-on-surface mb-4">
-              Turning Ideas into Digital Success Stories
-            </h2>
-            <p className="text-on-surface-variant text-xs font-label tracking-widest uppercase">
-              OUR WORK SPEAKS ABOUT THE QUALITY OF OUR EXECUTION AND OUR COMMITMENT TO DELIVERING RESULTS.
-            </p>
-          </div>
-
-          {/* Carousel */}
-          <div className="relative flex items-center justify-center h-[380px]">
-            {projects.map((project, idx) => {
-              const pos = getPos(idx)
-              const isCenter = pos === 'center'
-              const isLeft = pos === 'left'
-              const isRight = pos === 'right'
-              const isHidden = pos === 'hidden'
-
-              return (
-                <div
-                  key={project.id}
-                  onClick={() => !isCenter && setActiveSlide(idx)}
-                  className={`absolute transition-all duration-500 rounded-3xl overflow-hidden cursor-pointer select-none
-                    ${isCenter ? 'w-[360px] md:w-[420px] h-[340px] z-20 scale-100 opacity-100' : ''}
-                    ${isLeft ? 'w-[280px] md:w-[340px] h-[280px] z-10 scale-95 opacity-60 -translate-x-[220px] md:-translate-x-[300px]' : ''}
-                    ${isRight ? 'w-[280px] md:w-[340px] h-[280px] z-10 scale-95 opacity-60 translate-x-[220px] md:translate-x-[300px]' : ''}
-                    ${isHidden ? 'opacity-0 scale-90 pointer-events-none' : ''}
-                  `}
-                >
-                  <div className={`w-full h-full bg-gradient-to-br ${project.bg} p-8 flex flex-col justify-between relative overflow-hidden`}>
-                    {/* Background icon watermark */}
-                    <div className="absolute right-[-20px] bottom-[-20px] opacity-10">
-                      <span className="material-symbols-outlined text-white" style={{ fontSize: '180px' }}>{project.icon}</span>
+            <div className="hero-visual" aria-label="A connected digital product workflow">
+              <div className="visual-caption caption-top">
+                <span className="caption-dot" />
+                From idea to launch
+              </div>
+              <div className="product-canvas">
+                <div className="canvas-topbar">
+                  <div className="canvas-dots"><i /><i /><i /></div>
+                  <div className="canvas-title">WorkAidly / Delivery OS</div>
+                  <div className="canvas-live"><span /> Live</div>
+                </div>
+                <div className="canvas-body">
+                  <aside className="canvas-sidebar">
+                    <div className="canvas-mini-brand"><i /><i /><i /></div>
+                    <span className="active"><Icon name="space_dashboard" /></span>
+                    <span><Icon name="account_tree" /></span>
+                    <span><Icon name="data_object" /></span>
+                    <span><Icon name="monitoring" /></span>
+                  </aside>
+                  <div className="canvas-main">
+                    <div className="canvas-heading">
+                      <div><small>Product command center</small><strong>Good morning, team.</strong></div>
+                      <div className="canvas-avatar">WA</div>
                     </div>
-
-                    <div>
-                      <div className="flex gap-2 mb-4">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="px-3 py-1 rounded-full text-xs font-semibold border border-white/20 text-white/80 bg-white/10">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="font-headline text-2xl font-bold text-white mb-2">{project.name}</h3>
-                      <p className="text-white/60 text-sm font-light leading-relaxed max-w-[260px]">{project.tagline}</p>
+                    <div className="canvas-stats">
+                      <div><small>Product strategy</small><strong>Aligned</strong><span className="status-positive">Ready</span></div>
+                      <div><small>Current sprint</small><strong>04 / Build</strong><span>On track</span></div>
+                      <div><small>Launch status</small><strong>Quality check</strong><span>In review</span></div>
                     </div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-white">{project.icon}</span>
+                    <div className="workflow-card">
+                      <div className="workflow-title"><span>Connected delivery</span><small>This week</small></div>
+                      <div className="workflow-track" aria-hidden="true">
+                        <div className="workflow-line" />
+                        <div className="workflow-node node-done"><i><Icon name="lightbulb" /></i><span>Strategy</span><small>Complete</small></div>
+                        <div className="workflow-node node-done"><i><Icon name="draw" /></i><span>Design</span><small>Complete</small></div>
+                        <div className="workflow-node node-active"><i><Icon name="code" /></i><span>Build</span><small>In progress</small></div>
+                        <div className="workflow-node"><i><Icon name="rocket_launch" /></i><span>Launch</span><small>Next</small></div>
                       </div>
-                      <Link
-                        to="/contact"
-                        onClick={(e) => e.stopPropagation()}
-                        className="px-5 py-2 rounded-xl text-xs font-bold text-white border border-white/30 hover:bg-white/20 transition-all"
-                      >
-                        VIEW MORE
-                      </Link>
+                    </div>
+                    <div className="canvas-bottom-row">
+                      <div className="activity-card">
+                        <div className="mini-label">Recent decisions</div>
+                        <p><span className="activity-icon">✓</span> Onboarding flow approved</p>
+                        <p><span className="activity-icon">✓</span> API architecture aligned</p>
+                      </div>
+                      <div className="pulse-card">
+                        <div className="mini-label">Delivery pulse</div>
+                        <div className="pulse-chart" aria-hidden="true">
+                          <i style={{ height: '38%' }} /><i style={{ height: '52%' }} /><i style={{ height: '44%' }} />
+                          <i style={{ height: '72%' }} /><i style={{ height: '64%' }} /><i style={{ height: '88%' }} />
+                          <i style={{ height: '78%' }} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              )
-            })}
+              </div>
+              <div className="floating-note note-one">
+                <Icon name="check_circle" className="note-status-icon" />
+                <div><small>System status</small><strong>Everything connected</strong></div>
+              </div>
+              <div className="floating-note note-two">
+                <div className="note-icon"><Icon name="auto_awesome" /></div>
+                <div><small>Built around</small><strong>Your workflow</strong></div>
+              </div>
+            </div>
           </div>
 
-          {/* Dots + Nav */}
-          <div className="flex items-center justify-center gap-6 mt-8">
-            <button onClick={prev} className="w-10 h-10 rounded-full border border-outline-variant hover:border-primary hover:text-primary transition-all flex items-center justify-center text-on-surface-variant">
-              <span className="material-symbols-outlined">chevron_left</span>
-            </button>
-            <div className="flex gap-2">
-              {projects.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveSlide(i)}
-                  className={`rounded-full transition-all duration-300 ${i === activeSlide ? 'bg-primary w-6 h-2.5' : 'bg-outline-variant w-2.5 h-2.5'}`}
-                />
+          <div className="home-container capability-rail" aria-label="Our capabilities">
+            <span className="rail-intro">What we build</span>
+            {capabilities.map((item) => (
+              <div key={item.label} className="rail-item">
+                <Icon name={item.icon} />
+                {item.label}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="work-section">
+          <div className="home-container">
+            <div className="section-heading work-heading">
+              <div>
+                <span className="section-kicker">Selected work</span>
+                <h2>Proof lives in the <em>product.</em></h2>
+              </div>
+              <p>We connect strategic thinking with careful execution-creating digital products that are useful on day one and adaptable long after.</p>
+            </div>
+
+            <div className="work-showcase">
+              <div className="work-copy">
+                <div className="work-tabs" role="tablist" aria-label="Featured projects">
+                  {projects.map((project) => (
+                    <button
+                      key={project.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeProject === project.id}
+                      aria-controls="project-panel"
+                      className={activeProject === project.id ? 'active' : ''}
+                      onClick={() => setActiveProject(project.id)}
+                    >
+                      <span>{project.index}</span>
+                      <strong>{project.name}</strong>
+                      <Icon name={project.icon} />
+                    </button>
+                  ))}
+                </div>
+
+                <div className="work-description" aria-live="polite">
+                  <span>{selectedProject.eyebrow}</span>
+                  <h3>{selectedProject.statement}</h3>
+                  <div className="work-outcome">
+                    <small>{selectedProject.metricLabel}</small>
+                    <strong>{selectedProject.metric}</strong>
+                  </div>
+                  <Link to="/contact">Discuss a similar project <span aria-hidden="true">↗</span></Link>
+                </div>
+              </div>
+
+              <div id="project-panel" role="tabpanel" className="work-visual">
+                <WorkflowPreview project={selectedProject} />
+                <span className="work-stamp">Designed to<br />move work forward</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="services-section">
+          <div className="home-container">
+            <div className="section-heading services-heading">
+              <div>
+                <span className="section-kicker">Capabilities</span>
+                <h2>Different needs.<br /><em>One joined-up team.</em></h2>
+              </div>
+              <Link to="/services" className="text-link">Explore all services <span aria-hidden="true">↗</span></Link>
+            </div>
+
+            <div className="services-bento">
+              {services.map((service) => (
+                <article className={`service-card ${service.featured ? 'service-featured' : ''}`} key={service.title}>
+                  <div className="service-card-top">
+                    <span>{service.number}</span>
+                    <i><Icon name={service.icon} /></i>
+                  </div>
+                  {service.featured && (
+                    <div className="service-system" aria-hidden="true">
+                      <div className="system-core"><span className="brand-mark"><span /><span /><span /></span></div>
+                      <div className="system-node system-node-one"><i />Research</div>
+                      <div className="system-node system-node-two"><i />Design</div>
+                      <div className="system-node system-node-three"><i />Build</div>
+                      <div className="system-node system-node-four"><i />Scale</div>
+                      <svg viewBox="0 0 400 210" preserveAspectRatio="none">
+                        <path d="M200 105 C150 105 150 35 78 35" />
+                        <path d="M200 105 C250 105 250 35 322 35" />
+                        <path d="M200 105 C150 105 150 175 78 175" />
+                        <path d="M200 105 C250 105 250 175 322 175" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className="service-card-copy">
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                    <div className="service-tags">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                  </div>
+                </article>
               ))}
             </div>
-            <button onClick={next} className="w-10 h-10 rounded-full border border-outline-variant hover:border-primary hover:text-primary transition-all flex items-center justify-center text-on-surface-variant">
-              <span className="material-symbols-outlined">chevron_right</span>
-            </button>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section className="process-section">
+          <div className="process-orbit" aria-hidden="true" />
+          <div className="home-container process-layout">
+            <div className="process-intro">
+              <span className="section-kicker section-kicker-light">How we work</span>
+              <h2>A clear path through <em>complex work.</em></h2>
+              <p>No black boxes and no unnecessary layers. You always know what we’re solving, what is moving, and what comes next.</p>
+              <Link to="/process" className="button button-light">See our process <span aria-hidden="true">↗</span></Link>
+            </div>
+
+            <ol className="process-list">
+              {process.map((step, index) => (
+                <li key={step.number}>
+                  <div className="process-marker">
+                    <span>{step.number}</span>
+                    {index < process.length - 1 && <i />}
+                  </div>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="principles-section">
+          <div className="home-container principles-layout">
+            <div className="principles-label">
+              <span className="section-kicker">Why WorkAidly</span>
+              <span className="principles-index">05 / 05</span>
+            </div>
+            <div className="principles-main">
+              <h2>Built with the care of a product team, not the hand-offs of an agency.</h2>
+              <div className="principles-grid">
+                <div>
+                  <span>01</span>
+                  <h3>Senior attention</h3>
+                  <p>The people shaping the work stay close to it-from first decision to final detail.</p>
+                </div>
+                <div>
+                  <span>02</span>
+                  <h3>Useful over impressive</h3>
+                  <p>Every feature and interaction must earn its place by making the product clearer or more valuable.</p>
+                </div>
+                <div>
+                  <span>03</span>
+                  <h3>Made to evolve</h3>
+                  <p>We build strong foundations so the product can adapt as your users, team, and ambition grow.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
 
       <Footer />
-
-      {/* Mobile FAB */}
-      <div className="fixed bottom-8 right-8 z-40 md:hidden">
-        <Link to="/contact" className="w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center">
-          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>chat_bubble</span>
-        </Link>
-      </div>
     </div>
   )
 }

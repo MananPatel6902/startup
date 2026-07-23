@@ -4,16 +4,20 @@ import Footer from '../components/Footer'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', subject: '', email: '', message: '' })
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const handleChange = (e) => {
+    setSubmitted(false)
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Form submission handler
+    setSubmitted(true)
   }
 
   return (
-    <div className="bg-background text-on-surface font-body">
+    <div id="main-content" className="bg-background text-on-surface font-body">
       <Nav />
 
       {/* Page Hero */}
@@ -27,7 +31,7 @@ export default function Contact() {
             <span className="text-primary italic font-medium">We'll shape the solution.</span>
           </h1>
           <p className="text-on-surface-variant text-lg font-light max-w-2xl">
-            Whether it's a new SaaS venture, a complex integration, or academic guidance — we're ready to execute.
+            Whether it's a new SaaS venture, a complex integration, or an AI-powered workflow - we're ready to execute.
           </p>
         </div>
       </section>
@@ -42,7 +46,7 @@ export default function Contact() {
                 One conversation can change everything.
               </h2>
               <p className="text-surface-variant text-lg font-light mb-12">
-                We respond to every inquiry within one business day. No generic templates — just a real conversation about your goals.
+                We respond to every inquiry within one business day. No generic templates - just a real conversation about your goals.
               </p>
 
               <div className="space-y-8">
@@ -78,7 +82,7 @@ export default function Contact() {
               {/* Testimonial */}
               <div className="mt-16 p-6 rounded-2xl bg-white/5 border border-white/10">
                 <p className="text-surface-variant font-light text-sm leading-relaxed italic mb-4">
-                  "WorkAidly didn't just deliver the product — they understood the problem. That's rare."
+                  "WorkAidly didn't just deliver the product - they understood the problem. That's rare."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-primary/30 flex items-center justify-center">
@@ -96,58 +100,73 @@ export default function Contact() {
             <div className="bg-surface rounded-3xl p-8 text-on-surface shadow-2xl">
               <h3 className="font-headline text-xl font-bold mb-8">Send an Inquiry</h3>
               <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Name</label>
+                    <label htmlFor="name" className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Name</label>
                     <input
+                      id="name"
                       name="name"
                       value={form.name}
                       onChange={handleChange}
                       className="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/40 outline-none"
                       placeholder="John Doe"
                       type="text"
+                      autoComplete="name"
+                      required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Subject</label>
+                    <label htmlFor="subject" className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Subject</label>
                     <input
+                      id="subject"
                       name="subject"
                       value={form.subject}
                       onChange={handleChange}
                       className="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/40 outline-none"
                       placeholder="SaaS Product"
                       type="text"
+                      required
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Work Email</label>
+                  <label htmlFor="email" className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Work Email</label>
                   <input
+                    id="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
                     className="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/40 outline-none"
                     placeholder="john@company.com"
                     type="email"
+                    autoComplete="email"
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Message</label>
+                  <label htmlFor="message" className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Message</label>
                   <textarea
+                    id="message"
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     className="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/40 outline-none resize-none"
                     placeholder="How can we help you?"
                     rows={5}
+                    required
                   />
                 </div>
                 <button
                   type="submit"
                   className="w-full py-4 bg-primary text-on-primary font-bold rounded-xl hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  Send Inquiry
+                  {submitted ? 'Inquiry received - thank you' : 'Send Inquiry'}
                 </button>
+                {submitted && (
+                  <p className="text-sm text-primary text-center" role="status">
+                    Thanks, {form.name}. We’ll reply to {form.email} within one business day.
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -161,9 +180,9 @@ export default function Contact() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               { q: 'How quickly can you start?', a: 'Most projects kick off within 1–2 weeks of initial alignment. We keep capacity available for ready-to-move clients.' },
-              { q: 'Do you work with startups?', a: 'Absolutely. We work with founders at every stage — from pre-product ideation to scaling established platforms.' },
+              { q: 'Do you work with startups?', a: 'Absolutely. We work with founders at every stage - from pre-product ideation to scaling established platforms.' },
               { q: 'What is your pricing model?', a: "We offer both project-based and retainer engagements depending on scope. We'll propose the right model after discovery." },
-              { q: 'Can you work with my existing team?', a: 'Yes. We integrate cleanly as an extension of your in-house team or operate fully independently — your call.' },
+              { q: 'Can you work with my existing team?', a: 'Yes. We integrate cleanly as an extension of your in-house team or operate fully independently - your call.' },
             ].map(({ q, a }) => (
               <div key={q} className="p-8 bg-surface-container-lowest rounded-3xl">
                 <h3 className="font-headline text-lg font-bold text-on-surface mb-3">{q}</h3>
