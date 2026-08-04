@@ -1,0 +1,9 @@
+QA CHECK REPORT - WorkAidly Concept 3 Final Checked Package
+
+01_Primary_Horizontal/workaidly-primary-approved.png: size=(1068, 196), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
+02_Stacked/workaidly-stacked-approved.png: size=(320, 231), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
+03_Social_Icon/workaidly-social-icon-approved.png: size=(219, 213), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
+04_Favicon/favicon-16x16.png: size=(16, 16), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
+04_Favicon/favicon-24x24.png: size=(24, 24), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
+04_Favicon/favicon-32x32.png: size=(32, 32), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
+06_Web_Ready/navbar-480px.png: size=(480, 88), edge_touch={'top': 0, 'bottom': 0, 'left': 0, 'right': 0}

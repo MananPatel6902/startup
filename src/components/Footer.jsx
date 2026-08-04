@@ -25,8 +25,13 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link to="/" className="brand brand-light">
-              <span className="brand-mark" aria-hidden="true"><span /><span /><span /></span>
-              <span>WorkAidly</span>
+              <img
+                className="brand-logo"
+                src="/WorkAidly_Concept3_Final_Checked/06_Web_Ready/navbar-480px.png"
+                alt="WorkAidly"
+                width="480"
+                height="100"
+              />
             </Link>
             <p>Digital products, platforms, and automation built with clarity, craft, and commercial purpose.</p>
           </div>

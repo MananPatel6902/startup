@@ -36,12 +36,17 @@ export default function Nav() {
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <nav className="site-nav" aria-label="Primary navigation">
         <Link to="/" className="brand" aria-label="WorkAidly home">
-          <span className="brand-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </span>
-          <span>WorkAidly</span>
+          <picture>
+            <source media="(min-width: 1200px)" srcSet="/WorkAidly_Concept3_Final_Checked/06_Web_Ready/navbar-960px.png" />
+            <source media="(min-width: 600px)" srcSet="/WorkAidly_Concept3_Final_Checked/06_Web_Ready/navbar-480px.png" />
+            <img
+              className="brand-logo"
+              src="/WorkAidly_Concept3_Final_Checked/06_Web_Ready/navbar-240px.png"
+              alt="WorkAidly"
+              width="240"
+              height="50"
+            />
+          </picture>
         </Link>
 
         <div className="desktop-nav">

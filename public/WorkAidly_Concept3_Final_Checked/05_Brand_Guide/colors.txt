@@ -1,0 +1,4 @@
+Primary Indigo: #222A82
+Secondary Teal: #27C7C4
+Black Version: #000000
+White Version: #FFFFFF
