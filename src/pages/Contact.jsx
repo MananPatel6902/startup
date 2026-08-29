@@ -56,7 +56,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs uppercase font-label tracking-widest text-surface-variant mb-1">Email us</p>
-                    <p className="text-lg font-medium">hello@workaidly.com</p>
+                    <p className="text-lg font-medium">connect@workaidly.com</p>
                   </div>
                 </div>
                 <div className="flex gap-4 items-center">
