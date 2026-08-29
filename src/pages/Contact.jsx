@@ -99,7 +99,7 @@ export default function Contact() {
             {/* Right: Form */}
             <div className="bg-surface rounded-3xl p-8 text-on-surface shadow-2xl">
               <h3 className="font-headline text-xl font-bold mb-8">Send an Inquiry</h3>
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form  name="contact" netlify className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Name</label>
