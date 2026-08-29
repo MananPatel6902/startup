@@ -89,8 +89,8 @@ export default function Contact() {
                     <span className="material-symbols-outlined text-sm text-inverse-primary">person</span>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold">Sarah K.</p>
-                    <p className="text-xs text-surface-variant">Founder, EdTech Startup</p>
+                    <p className="text-sm font-semibold">Rohan Darji</p>
+                    <p className="text-xs text-surface-variant">Founder, Real Estate Business</p>
                   </div>
                 </div>
               </div>

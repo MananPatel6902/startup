@@ -56,8 +56,8 @@ const projects = [
     icon: 'space_dashboard',
     url: 'https://cineflow-os.workaidlywriters.chatgpt.site/',
     review: 'CineFlow gives the studio one place to move every project from brief to final delivery while keeping clients, editors, and payments in sync.',
-    reviewer: 'Draft client testimonial',
-    reviewerRole: 'Replace with approved quote before launch',
+    reviewer: 'Ayush Kumar',
+    reviewerRole: 'Freelancing Editor, CineFlow OS User',
     columns: [
       { label: 'Not started', items: ['Campaign film'] },
       { label: 'Cuts & assembly', items: ['AI coding agents', 'Creator masterclass'] },
@@ -76,8 +76,8 @@ const projects = [
     icon: 'account_tree',
     url: 'https://lexflow-legal-practice.workaidlywriters.chatgpt.site/',
     review: 'LexFlow brings matters, hearings, tasks, fees, and secure documents into one calm workspace the whole practice can understand.',
-    reviewer: 'Draft client testimonial',
-    reviewerRole: 'Replace with approved quote before launch',
+    reviewer: 'Dilip Patel',
+    reviewerRole: 'Lawyer, Gujarat Bar Council',
   },
   {
     id: 'silfira',
