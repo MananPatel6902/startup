@@ -12,14 +12,7 @@ const tabs = [
     headline: 'SaaS Development',
     body: 'We architect end-to-end multi-tenant platforms built for scale. From billing & auth to role-based dashboards, our SaaS foundations are engineered to grow with your user base - and your revenue.',
     points: ['Multi-tenant architecture', 'Subscription & billing integration', 'Role-based access control', 'Usage analytics & metering'],
-    stack: [
-      { label: 'React', icon: '⚛' },
-      { label: 'Node.js', icon: '⬢' },
-      { label: 'PostgreSQL', icon: '🐘' },
-      { label: 'Stripe', icon: '💳' },
-      { label: 'AWS', icon: '☁' },
-      { label: 'Docker', icon: '🐳' },
-    ],
+    stack: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS', 'Docker'],
   },
   {
     id: 'custom',
@@ -28,14 +21,7 @@ const tabs = [
     headline: 'Custom Software',
     body: 'Bespoke applications engineered around your exact operational constraints. We reject generic templates and build precise tools that solve the problem you actually have - not one that fits a pre-packaged solution.',
     points: ['Domain-specific tooling', 'Legacy system modernisation', 'API-first architecture', 'Thorough documentation'],
-    stack: [
-      { label: 'Python', icon: '🐍' },
-      { label: 'TypeScript', icon: '🔷' },
-      { label: 'FastAPI', icon: '⚡' },
-      { label: 'React', icon: '⚛' },
-      { label: 'Redis', icon: '🔴' },
-      { label: 'PostgreSQL', icon: '🐘' },
-    ],
+    stack: ['Python', 'TypeScript', 'FastAPI', 'React', 'Redis', 'PostgreSQL'],
   },
   {
     id: 'web',
@@ -44,14 +30,7 @@ const tabs = [
     headline: 'Website & Web Apps',
     body: 'From high-conversion landing pages to complex data-driven applications, we create digital experiences that feel intentional and perform flawlessly. Every pixel serves a purpose.',
     points: ['High-conversion landing pages', 'Complex web applications', 'CMS integration', 'Performance-first development'],
-    stack: [
-      { label: 'React', icon: '⚛' },
-      { label: 'Next.js', icon: '▲' },
-      { label: 'TailwindCSS', icon: '🌊' },
-      { label: 'Framer Motion', icon: '🎞' },
-      { label: 'Vercel', icon: '▲' },
-      { label: 'Sanity', icon: '📐' },
-    ],
+    stack: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'Vercel', 'Sanity'],
   },
   {
     id: 'automation',
@@ -60,14 +39,7 @@ const tabs = [
     headline: 'Automation & Integration',
     body: 'Connect your disparate tools into a single, intelligent workflow. We eliminate manual overhead by orchestrating APIs, webhooks, and data pipelines that run 24/7 without you touching them.',
     points: ['Workflow orchestration', 'Third-party API integration', 'Data pipeline automation', 'Custom webhook systems'],
-    stack: [
-      { label: 'n8n', icon: '🔗' },
-      { label: 'Zapier', icon: '⚡' },
-      { label: 'Python', icon: '🐍' },
-      { label: 'Make', icon: '🔧' },
-      { label: 'REST APIs', icon: '🌐' },
-      { label: 'Webhooks', icon: '📡' },
-    ],
+    stack: ['n8n', 'Zapier', 'Python', 'Make', 'REST APIs', 'Webhooks'],
   },
   {
     id: 'ai',
@@ -76,14 +48,7 @@ const tabs = [
     headline: 'AI / ML Development',
     body: 'We build intelligent systems that go beyond demos - production-grade AI features embedded into your product. From LLM-powered workflows to custom ML models, we ship AI that actually delivers value.',
     points: ['LLM integration & fine-tuning', 'RAG pipelines', 'ML model development', 'AI-powered automation'],
-    stack: [
-      { label: 'OpenAI', icon: '🤖' },
-      { label: 'LangChain', icon: '🔗' },
-      { label: 'Python', icon: '🐍' },
-      { label: 'PyTorch', icon: '🔥' },
-      { label: 'Pinecone', icon: '🌲' },
-      { label: 'HuggingFace', icon: '🤗' },
-    ],
+    stack: ['OpenAI', 'LangChain', 'Python', 'PyTorch', 'Pinecone', 'HuggingFace'],
   },
 ]
 
@@ -165,12 +130,12 @@ export default function Services() {
               <div>
                 <p className="text-xs font-label uppercase tracking-widest text-on-surface-variant mb-4">Tech Stack</p>
                 <div className="flex flex-wrap gap-3">
-                  {active.stack.map(({ label, icon }) => (
+                  {active.stack.map((label) => (
                     <div
                       key={label}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-surface-container-low rounded-xl border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all"
+                      className="flex items-center gap-2.5 px-4 py-2.5 bg-surface-container-low rounded-full border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all"
                     >
-                      <span className="text-lg leading-none">{icon}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/70 shadow-[0_0_0_4px_rgba(79,70,229,0.08)]" aria-hidden="true" />
                       <span className="text-xs font-semibold text-on-surface">{label}</span>
                     </div>
                   ))}

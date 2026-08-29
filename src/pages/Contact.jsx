@@ -4,16 +4,34 @@ import Footer from '../components/Footer'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', subject: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState('idle')
 
   const handleChange = (e) => {
-    setSubmitted(false)
+    setSubmitStatus('idle')
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
+    setSubmitStatus('submitting')
+
+    try {
+      const body = new URLSearchParams({
+        'form-name': 'contact',
+        ...form,
+      })
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      })
+
+      if (!response.ok) throw new Error('Form submission failed')
+      setSubmitStatus('success')
+    } catch {
+      setSubmitStatus('error')
+    }
   }
 
   return (
@@ -99,7 +117,18 @@ export default function Contact() {
             {/* Right: Form */}
             <div className="bg-surface rounded-3xl p-8 text-on-surface shadow-2xl">
               <h3 className="font-headline text-xl font-bold mb-8">Send an Inquiry</h3>
-              <form  name="contact" netlify className="space-y-6" onSubmit={handleSubmit}>
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                className="space-y-6"
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <p hidden>
+                  <label>Don’t fill this out: <input name="bot-field" /></label>
+                </p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-xs font-label uppercase tracking-widest mb-2 font-semibold">Name</label>
@@ -158,13 +187,19 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
+                  disabled={submitStatus === 'submitting'}
                   className="w-full py-4 bg-primary text-on-primary font-bold rounded-xl hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  {submitted ? 'Inquiry received - thank you' : 'Send Inquiry'}
+                  {submitStatus === 'submitting' ? 'Sending inquiry…' : submitStatus === 'success' ? 'Inquiry received - thank you' : 'Send Inquiry'}
                 </button>
-                {submitted && (
+                {submitStatus === 'success' && (
                   <p className="text-sm text-primary text-center" role="status">
                     Thanks, {form.name}. We’ll reply to {form.email} within one business day.
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="text-sm text-error text-center" role="alert">
+                    We couldn’t send your inquiry. Please email connect@workaidly.com instead.
                   </p>
                 )}
               </form>
