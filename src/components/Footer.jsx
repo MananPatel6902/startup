@@ -46,7 +46,7 @@ export default function Footer() {
           <div>
             <p className="footer-label">Connect</p>
             <div className="footer-links">
-              <a href="mailto:workaidly@gmail.com">workaidly@gmail.com</a>
+              <a href="mailto:connect@workaidly.com">connect@workaidly.com</a>
               <span>India · Working globally</span>
             </div>
           </div>

@@ -45,52 +45,54 @@ const services = [
 
 const projects = [
   {
-    id: 'flowdesk',
+    id: 'cineflow',
     index: '01',
-    eyebrow: 'SaaS · Product design',
-    name: 'FlowDesk',
-    statement: 'One calm workspace for distributed teams to plan, align, and deliver.',
+    eyebrow: 'Studio operations · SaaS platform',
+    name: 'CineFlow OS',
+    statement: 'A complete production operating system for projects, people, clients, and finance.',
     metricLabel: 'Core outcome',
-    metric: 'Clarity at scale',
-    tone: 'indigo',
-    icon: 'dashboard',
+    metric: 'Production under control',
+    tone: 'cineflow',
+    icon: 'space_dashboard',
+    url: 'https://cineflow-os.workaidlywriters.chatgpt.site/',
+    review: 'CineFlow gives the studio one place to move every project from brief to final delivery while keeping clients, editors, and payments in sync.',
+    reviewer: 'Draft client testimonial',
+    reviewerRole: 'Replace with approved quote before launch',
     columns: [
-      { label: 'To plan', items: ['Research synthesis', 'Release brief'] },
-      { label: 'In progress', items: ['Dashboard system', 'Team roles'] },
-      { label: 'Complete', items: ['Product strategy', 'User journeys'] },
+      { label: 'Not started', items: ['Campaign film'] },
+      { label: 'Cuts & assembly', items: ['AI coding agents', 'Creator masterclass'] },
+      { label: 'Review', items: ['Founder story'] },
     ],
   },
   {
-    id: 'opslink',
+    id: 'lexflow',
     index: '02',
-    eyebrow: 'Automation · Applied AI',
-    name: 'OpsLink',
-    statement: 'An intelligent operations layer that keeps tools, data, and teams in sync.',
+    eyebrow: 'Legal operations · Practice management',
+    name: 'LexFlow',
+    statement: 'A secure, calm workspace that keeps matters, hearings, tasks, and documents in view.',
     metricLabel: 'Core outcome',
-    metric: 'Connected operations',
-    tone: 'teal',
-    icon: 'hub',
-    columns: [
-      { label: 'Signals', items: ['New opportunity', 'Support request'] },
-      { label: 'Automations', items: ['Enrich & route', 'Create workflow'] },
-      { label: 'Outcomes', items: ['Team notified', 'Record updated'] },
-    ],
+    metric: 'Matters clearly in view',
+    tone: 'lexflow',
+    icon: 'account_tree',
+    url: 'https://lexflow-legal-practice.workaidlywriters.chatgpt.site/',
+    review: 'LexFlow brings matters, hearings, tasks, fees, and secure documents into one calm workspace the whole practice can understand.',
+    reviewer: 'Draft client testimonial',
+    reviewerRole: 'Replace with approved quote before launch',
   },
   {
-    id: 'guestbrief',
+    id: 'silfira',
     index: '03',
-    eyebrow: 'Hospitality · Web platform',
-    name: 'GuestBrief',
-    statement: 'A more thoughtful digital guest journey, from first booking to final follow-up.',
+    eyebrow: 'Luxury real estate · Web experience',
+    name: 'Silfira',
+    statement: 'A premium property-discovery experience that turns browsing into confident enquiries.',
     metricLabel: 'Core outcome',
-    metric: 'Better guest journeys',
-    tone: 'violet',
+    metric: 'Discovery to enquiry',
+    tone: 'silfira',
     icon: 'hotel',
-    columns: [
-      { label: 'Before stay', items: ['Welcome guide', 'Preferences'] },
-      { label: 'During stay', items: ['Local services', 'Live requests'] },
-      { label: 'After stay', items: ['Feedback loop', 'Return offer'] },
-    ],
+    url: 'https://www.silfira.co.in/',
+    review: 'Silfira Realtors made our investment property search seamless. Their market knowledge and professionalism are unmatched.',
+    reviewer: 'Mithil Patel',
+    reviewerRole: 'Property Investor',
   },
 ]
 
@@ -129,45 +131,40 @@ function Icon({ name, className = '' }) {
   )
 }
 
-function WorkflowPreview({ project }) {
+function CineFlowPreview({ project }) {
   return (
-    <div className={`work-preview work-preview-${project.tone}`}>
-      <div className="preview-topbar">
-        <div className="preview-brand">
-          <span className="preview-logo"><i /><i /><i /></span>
-          <span>{project.name}</span>
-        </div>
-        <div className="preview-status"><span /> Live workspace</div>
-      </div>
-      <div className="preview-body">
-        <aside className="preview-sidebar" aria-hidden="true">
-          <span className="active" />
-          <span />
-          <span />
-          <span />
+    <div className="work-preview work-preview-cineflow">
+      <div className="cineflow-window">
+        <aside className="cineflow-sidebar" aria-hidden="true">
+          <div className="cineflow-brand"><i>▣</i><strong>CINEFLOW OS</strong></div>
+          <small>WORKSPACE</small>
+          <span className="active">Projects Database</span>
+          <span>Submissions Queue</span>
+          <small>CRM</small>
+          <span>Client CRM</span>
+          <span>Partner CRM</span>
+          <small>FINANCE</small>
+          <span>Studio Finance</span>
         </aside>
-        <div className="preview-content">
-          <div className="preview-heading">
-            <div>
-              <small>Workspace</small>
-              <strong>Delivery overview</strong>
-            </div>
-            <button type="button" tabIndex="-1">+ Add item</button>
+        <div className="cineflow-main">
+          <div className="mock-breadcrumb">Operations Hub <b>/</b> Projects Database</div>
+          <div className="mock-page-heading">
+            <div><small>PRODUCTION WORKSPACE</small><strong>Production Database &amp; Workflows</strong></div>
+            <button type="button" tabIndex="-1">+ New Project</button>
           </div>
-          <div className="preview-columns">
+          <div className="cineflow-toolbar"><span>Table</span><span className="active">By Status</span><span>All Projects</span><i /> <span>Filter</span><span>Sort</span></div>
+          <div className="cineflow-board">
             {project.columns.map((column, columnIndex) => (
-              <div className="preview-column" key={column.label}>
-                <div className="preview-column-title">
-                  <span>{column.label}</span>
-                  <small>0{columnIndex + 2}</small>
-                </div>
+              <div className="cineflow-column" key={column.label}>
+                <div className="cineflow-column-title"><span>{column.label}</span><small>{column.items.length}</small></div>
                 {column.items.map((item, itemIndex) => (
-                  <div className="preview-task" key={item}>
-                    <span className={`preview-task-icon icon-${itemIndex}`} />
-                    <p>{item}</p>
-                    <div className="preview-task-meta"><i /><i /></div>
+                  <div className="cineflow-card" key={item}>
+                    <small>{columnIndex === 2 ? '16:9 · REVIEW' : '16:9 · PRODUCTION'}</small>
+                    <strong>{item}</strong>
+                    <div><span>{itemIndex ? '45 mins' : '18 mins'}</span><span>Due Aug {18 + itemIndex}</span></div>
                   </div>
                 ))}
+                <em>+ New project</em>
               </div>
             ))}
           </div>
@@ -175,6 +172,57 @@ function WorkflowPreview({ project }) {
       </div>
     </div>
   )
+}
+
+function LexFlowPreview() {
+  return (
+    <div className="work-preview work-preview-lexflow">
+      <div className="lexflow-window">
+        <aside className="lexflow-sidebar" aria-hidden="true">
+          <div className="lexflow-brand"><i>LF</i><strong>LexFlow</strong></div>
+          {['Dashboard', 'Cases', 'Clients', 'Hearings', 'Tasks', 'Documents'].map((item, index) => <span className={index === 0 ? 'active' : ''} key={item}>{item.slice(0, 1)} <b>{item}</b></span>)}
+        </aside>
+        <div className="lexflow-main">
+          <div className="lexflow-top"><div><small>LEXFLOW WORKSPACE</small><strong>Dashboard</strong></div><span>AD</span></div>
+          <div className="lexflow-hero"><small>THURSDAY, 27 AUGUST</small><strong>Your practice, clearly in view.</strong><p>Priorities, hearings, and secure matter activity in one calm workspace.</p></div>
+          <div className="lexflow-stats">
+            {[['Active matters', '12'], ['Upcoming hearings', '04'], ['Open tasks', '09'], ['Secure documents', '86']].map(([label, value]) => <div key={label}><small>{label}</small><strong>{value}</strong><span>Across the practice</span></div>)}
+          </div>
+          <div className="lexflow-panels">
+            <div><strong>Next hearings</strong><p><b>28 Aug</b><span>LF-2026-001<br /><small>Delhi High Court · Court 12</small></span><em>SCHEDULED</em></p></div>
+            <div><strong>Priority tasks</strong><p><i /><span>Prepare hearing brief<br /><small>LF-2026-001 · Aarav Mehta</small></span><em>DONE</em></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function SilfiraPreview() {
+  return (
+    <div className="work-preview work-preview-silfira">
+      <div className="silfira-window">
+        <div className="silfira-nav"><div><span>◈</span><strong>SILFIRA <em>REALTORS</em></strong></div><nav>Home&nbsp;&nbsp;&nbsp; Properties&nbsp;&nbsp;&nbsp; About&nbsp;&nbsp;&nbsp; <b>Contact</b></nav></div>
+        <div className="silfira-hero">
+          <div className="silfira-buildings" aria-hidden="true" />
+          <small>CURATED HOMES · GANDHINAGAR</small>
+          <strong>Discover Your<br /><em>Dream Space</em></strong>
+          <p>Exceptional properties, thoughtfully presented.</p>
+          <div><button type="button" tabIndex="-1">Browse Properties</button><button type="button" tabIndex="-1">Get Valuation</button></div>
+        </div>
+        <div className="silfira-properties">
+          <span>FEATURED PROPERTIES</span>
+          <div><article><i /><strong>Only ONE</strong><small>3 BHK · Sargasan</small></article><article><i /><strong>Atmos by Solaire</strong><small>3–4 BHK · Gandhinagar</small></article><article><i /><strong>Dev Auram</strong><small>2–3 BHK · Palm Road</small></article></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ProjectPreview({ project }) {
+  if (project.id === 'cineflow') return <CineFlowPreview project={project} />
+  if (project.id === 'lexflow') return <LexFlowPreview />
+  return <SilfiraPreview />
 }
 
 export default function Home() {
@@ -338,13 +386,20 @@ export default function Home() {
                     <small>{selectedProject.metricLabel}</small>
                     <strong>{selectedProject.metric}</strong>
                   </div>
-                  <Link to="/contact">Discuss a similar project <span aria-hidden="true">↗</span></Link>
+                  <div className="work-links">
+                    <a href={selectedProject.url} target="_blank" rel="noreferrer">View live project <span aria-hidden="true">↗</span></a>
+                    <Link to="/contact">Discuss a similar project <span aria-hidden="true">→</span></Link>
+                  </div>
                 </div>
               </div>
 
               <div id="project-panel" role="tabpanel" className="work-visual">
-                <WorkflowPreview project={selectedProject} />
-                <span className="work-stamp">Designed to<br />move work forward</span>
+                <ProjectPreview project={selectedProject} />
+                <div className="project-review">
+                  <span aria-hidden="true">“</span>
+                  <blockquote>{selectedProject.review}</blockquote>
+                  <div><strong>{selectedProject.reviewer}</strong><small>{selectedProject.reviewerRole}</small></div>
+                </div>
               </div>
             </div>
           </div>
