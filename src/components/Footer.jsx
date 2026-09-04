@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 const links = [
   { to: '/services', label: 'Services' },
+  { to: '/products', label: 'Products' },
   { to: '/process', label: 'Process' },
   { to: '/team', label: 'About us' },
   { to: '/contact', label: 'Contact' },

@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 const team = [
   {
     name: 'Manan Patel',
+    photo: '/team_profile_photos/Manan.jpeg',
     role: 'Co-Founder & Software Engineer',
     icon: 'terminal',
     color: 'bg-primary/10',
@@ -14,6 +15,7 @@ const team = [
   },
   {
     name: 'Prakhyat Srivastava',
+    photo: '/team_profile_photos/Prakhyat.jpeg',
     role: 'Co-Founder & Data Analyst',
     icon: 'analytics',
     color: 'bg-secondary/10',
@@ -23,6 +25,7 @@ const team = [
   },
   {
     name: 'Kartikey Mishra',
+    photo: '/team_profile_photos/Kartikey.jpeg',
     role: 'Full-Stack Engineer',
     icon: 'code_blocks',
     color: 'bg-tertiary/10',
@@ -32,6 +35,7 @@ const team = [
   },
   {
     name: 'Sarthak Seth',
+    photo: '/team_profile_photos/Sarthak.jpeg',
     role: 'Frontend Developer',
     icon: 'web',
     color: 'bg-primary/10',
@@ -41,6 +45,7 @@ const team = [
   },
   {
     name: 'Ratnesh Patel',
+    photo: '/team_profile_photos/Ratnesh.jpeg',
     role: 'Marketing & Client Relations Lead',
     icon: 'campaign',
     color: 'bg-tertiary/10',
@@ -86,14 +91,25 @@ export default function Team() {
       {/* Team Grid */}
       <section className="py-20 px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {team.map(({ name, role, icon, color, iconColor, bio, skills }) => (
+          {team.map(({ name, photo, role, icon, color, iconColor, bio, skills }) => (
             <div
               key={name}
               className="p-8 bg-surface-container-lowest rounded-3xl group hover:shadow-xl transition-all duration-300 flex flex-col"
             >
               {/* Avatar */}
-              <div className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mb-6`}>
-                <span className={`material-symbols-outlined ${iconColor} text-3xl`}>{icon}</span>
+              <div className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mb-6 overflow-hidden shrink-0`}>
+                {photo ? (
+                  <img
+                    src={photo}
+                    alt={name}
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className={`material-symbols-outlined ${iconColor} text-3xl`}>{icon}</span>
+                )}
               </div>
 
               {/* Info */}
