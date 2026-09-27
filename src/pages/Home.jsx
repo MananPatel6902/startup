@@ -1,7 +1,12 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const capabilities = [
   { icon: 'cloud_sync', label: 'SaaS products' },
@@ -49,20 +54,11 @@ const projects = [
     index: '01',
     eyebrow: 'Studio operations · SaaS platform',
     name: 'CineFlow OS',
-    statement: 'A complete production operating system for projects, people, clients, and finance.',
+    statement: 'One operations hub connecting sales, clients, delivery, editors, finance, and reporting.',
     metricLabel: 'Core outcome',
     metric: 'Production under control',
-    tone: 'cineflow',
     icon: 'space_dashboard',
     url: 'https://cineflow-os.workaidlywriters.chatgpt.site/',
-    review: 'CineFlow gives the studio one place to move every project from brief to final delivery while keeping clients, editors, and payments in sync.',
-    reviewer: 'Ayush Kumar',
-    reviewerRole: 'Freelancing Editor, CineFlow OS User',
-    columns: [
-      { label: 'Not started', items: ['Campaign film'] },
-      { label: 'Cuts & assembly', items: ['AI coding agents', 'Creator masterclass'] },
-      { label: 'Review', items: ['Founder story'] },
-    ],
   },
   {
     id: 'lexflow',
@@ -72,27 +68,63 @@ const projects = [
     statement: 'A secure, calm workspace that keeps matters, hearings, tasks, and documents in view.',
     metricLabel: 'Core outcome',
     metric: 'Matters clearly in view',
-    tone: 'lexflow',
     icon: 'account_tree',
     url: 'https://lexflow-legal-practice.workaidlywriters.chatgpt.site/',
-    review: 'LexFlow brings matters, hearings, tasks, fees, and secure documents into one calm workspace the whole practice can understand.',
-    reviewer: 'Dilip Patel',
-    reviewerRole: 'Lawyer, Gujarat Bar Council',
+  },
+  {
+    id: 'aarogya',
+    index: '03',
+    eyebrow: 'Healthcare operations · Hospital management',
+    name: 'Aarogya',
+    statement: 'Reception, queues, clinical care, pharmacy, and inventory on one shared patient record.',
+    metricLabel: 'Core outcome',
+    metric: 'One record, every team',
+    icon: 'local_hospital',
+    url: 'https://aarogya-hospital-demo.prakhyat-qlb.chatgpt.site/',
+  },
+  {
+    id: 'fitted-pos',
+    index: '04',
+    eyebrow: 'Retail operations · Point of sale',
+    name: 'Fitted & Co. POS',
+    statement: 'Fast counter billing, garment inventory, GST invoices, and store reporting in one focused workspace.',
+    metricLabel: 'Core outcome',
+    metric: 'Checkout and stock, connected',
+    icon: 'point_of_sale',
+    url: 'https://fitted-and-co-pos.workaidlywriters.chatgpt.site/',
   },
   {
     id: 'silfira',
-    index: '03',
+    index: '05',
     eyebrow: 'Luxury real estate · Web experience',
     name: 'Silfira',
     statement: 'A premium property-discovery experience that turns browsing into confident enquiries.',
     metricLabel: 'Core outcome',
     metric: 'Discovery to enquiry',
-    tone: 'silfira',
     icon: 'hotel',
     url: 'https://www.silfira.co.in/',
-    review: 'Silfira Realtors made our investment property search seamless. Their market knowledge and professionalism are unmatched.',
-    reviewer: 'Mithil Patel',
-    reviewerRole: 'Property Investor',
+  },
+  {
+    id: 'netrafly',
+    index: '06',
+    eyebrow: 'Global trade · Corporate web experience',
+    name: 'Netra Fly Overseas',
+    statement: 'A global trade presence that turns a broad export catalogue into clear, credible quote journeys.',
+    metricLabel: 'Core outcome',
+    metric: 'Catalogue to global enquiry',
+    icon: 'public',
+    url: 'https://netraflyoverseas.com/',
+  },
+  {
+    id: 'ezee-controls',
+    index: '07',
+    eyebrow: 'Industrial engineering · OEM & ODM platform',
+    name: 'Ezee Controls',
+    statement: 'A technical B2B experience that clarifies the path from product brief to serial production.',
+    metricLabel: 'Core outcome',
+    metric: 'Concept to production, clarified',
+    icon: 'precision_manufacturing',
+    url: 'https://www.ezeecontrols.com/',
   },
 ]
 
@@ -113,6 +145,10 @@ const iconPaths = {
   hotel: 'M5 20V5h10v15M9 8h2m-2 3h2m-2 3h2m4-5h4v11H3m12-7h2m-2 3h2',
   space_dashboard: 'M4 4h7v8H4zm9 0h7v5h-7zm0 7h7v9h-7zM4 14h7v6H4z',
   account_tree: 'M6 5v7m0 0h11m-5 0V8m5 4v4M4 3h4v4H4zm6 3h4v4h-4zm5 8h4v4h-4z',
+  local_hospital: 'M9 4h6v5h5v6h-5v5H9v-5H4V9h5V4Z',
+  point_of_sale: 'M5 4h14v12H5zM8 8h2m4 0h2M8 12h8M7 20h10m-8-4v4m6-4v4',
+  public: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-18c2.2 2.4 3.3 5.4 3.3 9S14.2 18.6 12 21m0-18C9.8 5.4 8.7 8.4 8.7 12S9.8 18.6 12 21M3.5 9h17m-17 6h17',
+  precision_manufacturing: 'M9 4h6l1 4 4 1v6l-4 1-1 4H9l-1-4-4-1V9l4-1 1-4Zm3 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
   data_object: 'M8 4C5 4 4 6 4 8s1 4 4 4m8-8c3 0 4 2 4 4s-1 4-4 4M8 12c-3 0-4 2-4 4s1 4 4 4m8-8c3 0 4 2 4 4s-1 4-4 4',
   monitoring: 'M4 18V9m5 9V5m5 13v-6m5 6V3',
   lightbulb: 'M9 18h6m-5 2h4M8 15c-1.2-1-2-2.5-2-4.2a6 6 0 0 1 12 0c0 1.7-.8 3.2-2 4.2-.7.6-1 1.1-1 2H9c0-.9-.3-1.4-1-2Z',
@@ -131,110 +167,304 @@ function Icon({ name, className = '' }) {
   )
 }
 
-function CineFlowPreview({ project }) {
+function ProductCardVisual({ project }) {
+  const navigation = (
+    <span className="product-card-nav">
+      <span><Icon name={project.icon} /></span>
+      <i /><i /><i />
+    </span>
+  )
+
+  if (project.id === 'cineflow') {
+    return (
+      <span className="product-card-screen product-card-screen-cineflow" aria-hidden="true">
+        {navigation}
+        <span className="product-card-canvas">
+          <span className="product-card-label">Project pipeline</span>
+          <strong>04 active productions</strong>
+          <span className="mini-production-board">
+            <i><b /><b /></i><i><b /><b /><b /></i><i><b /></i>
+          </span>
+          <span className="mini-production-footer"><i /> Cuts in review <b>72%</b></span>
+        </span>
+      </span>
+    )
+  }
+
+  if (project.id === 'lexflow') {
+    return (
+      <span className="product-card-screen product-card-screen-lexflow" aria-hidden="true">
+        {navigation}
+        <span className="product-card-canvas">
+          <span className="product-card-label">Next hearing</span>
+          <strong>Delhi High Court · 10:30</strong>
+          <span className="mini-legal-date"><b>28</b><span><strong>LF-2026-001</strong><small>Brief ready</small></span></span>
+          <span className="mini-legal-list"><i><b />Matter notes</i><i><b />Secure documents</i></span>
+        </span>
+      </span>
+    )
+  }
+
+  if (project.id === 'aarogya') {
+    return (
+      <span className="product-card-screen product-card-screen-aarogya" aria-hidden="true">
+        {navigation}
+        <span className="product-card-canvas">
+          <span className="product-card-label">Live patient queue</span>
+          <strong>OPD · 12 waiting</strong>
+          <span className="mini-patient-queue"><i>14</i><i className="active">15</i><i>16</i></span>
+          <span className="mini-vitals"><span><b>98</b><small>SpO₂</small></span><span><b>72</b><small>BPM</small></span></span>
+        </span>
+      </span>
+    )
+  }
+
+  if (project.id === 'fitted-pos') {
+    return (
+      <span className="product-card-screen product-card-screen-fitted" aria-hidden="true">
+        {navigation}
+        <span className="product-card-canvas">
+          <span className="product-card-label">Current cart</span>
+          <strong>3 items · ₹4,780</strong>
+          <span className="mini-receipt"><i><b>Oxford shirt</b><em>×1</em></i><i><b>Linen trouser</b><em>×2</em></i><i><b>GST</b><em>₹516</em></i></span>
+          <span className="mini-pay-row"><small>Invoice ready</small><b>Pay now</b></span>
+        </span>
+      </span>
+    )
+  }
+
+  if (project.id === 'silfira') {
+    return (
+      <span className="product-card-screen product-card-screen-silfira" aria-hidden="true">
+        {navigation}
+        <span className="product-card-canvas">
+          <span className="product-card-label">Featured property</span>
+          <strong>Only ONE · Sargasan</strong>
+          <span className="mini-property"><i /><i /><i /><i /><span /></span>
+          <span className="mini-property-specs"><b>3 BHK</b><i />2,180 sq.ft.</span>
+        </span>
+      </span>
+    )
+  }
+
+  if (project.id === 'netrafly') {
+    return (
+      <span className="product-card-screen product-card-screen-netrafly" aria-hidden="true">
+        {navigation}
+        <span className="product-card-canvas">
+          <span className="product-card-label">Active trade route</span>
+          <strong>India → Canada</strong>
+          <span className="mini-trade-route"><i className="route-origin" /><i className="route-line" /><i className="route-destination" /><b>IN</b><b>CA</b></span>
+          <span className="mini-trade-tags"><i>Textiles</i><i>Agri</i><i>Parts</i></span>
+        </span>
+      </span>
+    )
+  }
+
   return (
-    <div className="work-preview work-preview-cineflow">
-      <div className="cineflow-window">
-        <aside className="cineflow-sidebar" aria-hidden="true">
-          <div className="cineflow-brand"><i>▣</i><strong>CINEFLOW OS</strong></div>
-          <small>WORKSPACE</small>
-          <span className="active">Projects Database</span>
-          <span>Submissions Queue</span>
-          <small>CRM</small>
-          <span>Client CRM</span>
-          <span>Partner CRM</span>
-          <small>FINANCE</small>
-          <span>Studio Finance</span>
-        </aside>
-        <div className="cineflow-main">
-          <div className="mock-breadcrumb">Operations Hub <b>/</b> Projects Database</div>
-          <div className="mock-page-heading">
-            <div><small>PRODUCTION WORKSPACE</small><strong>Production Database &amp; Workflows</strong></div>
-            <button type="button" tabIndex="-1">+ New Project</button>
-          </div>
-          <div className="cineflow-toolbar"><span>Table</span><span className="active">By Status</span><span>All Projects</span><i /> <span>Filter</span><span>Sort</span></div>
-          <div className="cineflow-board">
-            {project.columns.map((column, columnIndex) => (
-              <div className="cineflow-column" key={column.label}>
-                <div className="cineflow-column-title"><span>{column.label}</span><small>{column.items.length}</small></div>
-                {column.items.map((item, itemIndex) => (
-                  <div className="cineflow-card" key={item}>
-                    <small>{columnIndex === 2 ? '16:9 · REVIEW' : '16:9 · PRODUCTION'}</small>
-                    <strong>{item}</strong>
-                    <div><span>{itemIndex ? '45 mins' : '18 mins'}</span><span>Due Aug {18 + itemIndex}</span></div>
-                  </div>
-                ))}
-                <em>+ New project</em>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    <span className="product-card-screen product-card-screen-ezee" aria-hidden="true">
+      {navigation}
+      <span className="product-card-canvas">
+        <span className="product-card-label">Production stage</span>
+        <strong>Control unit · EVT 03</strong>
+        <span className="mini-schematic"><i /><i /><i /><i /><b /><b /><b /></span>
+        <span className="mini-production-progress"><span><i /></span><b>68%</b></span>
+      </span>
+    </span>
   )
 }
 
-function LexFlowPreview() {
-  return (
-    <div className="work-preview work-preview-lexflow">
-      <div className="lexflow-window">
-        <aside className="lexflow-sidebar" aria-hidden="true">
-          <div className="lexflow-brand"><i>LF</i><strong>LexFlow</strong></div>
-          {['Dashboard', 'Cases', 'Clients', 'Hearings', 'Tasks', 'Documents'].map((item, index) => <span className={index === 0 ? 'active' : ''} key={item}>{item.slice(0, 1)} <b>{item}</b></span>)}
-        </aside>
-        <div className="lexflow-main">
-          <div className="lexflow-top"><div><small>LEXFLOW WORKSPACE</small><strong>Dashboard</strong></div><span>AD</span></div>
-          <div className="lexflow-hero"><small>THURSDAY, 27 AUGUST</small><strong>Your practice, clearly in view.</strong><p>Priorities, hearings, and secure matter activity in one calm workspace.</p></div>
-          <div className="lexflow-stats">
-            {[['Active matters', '12'], ['Upcoming hearings', '04'], ['Open tasks', '09'], ['Secure documents', '86']].map(([label, value]) => <div key={label}><small>{label}</small><strong>{value}</strong><span>Across the practice</span></div>)}
-          </div>
-          <div className="lexflow-panels">
-            <div><strong>Next hearings</strong><p><b>28 Aug</b><span>LF-2026-001<br /><small>Delhi High Court · Court 12</small></span><em>SCHEDULED</em></p></div>
-            <div><strong>Priority tasks</strong><p><i /><span>Prepare hearing brief<br /><small>LF-2026-001 · Aarav Mehta</small></span><em>DONE</em></p></div>
-          </div>
-        </div>
-      </div>
-    </div>
+function ProductOrbitCard({ project, duplicate = false }) {
+  const cardClassName = `product-orbit-card product-orbit-${project.id}`
+  const content = (
+    <>
+      <span className="product-card-topline">
+        <span>{project.index}</span>
+        <span><i aria-hidden="true" /> Live</span>
+      </span>
+      <ProductCardVisual project={project} />
+      <span className="product-card-meta">
+        <span>
+          <strong>{project.name}</strong>
+          <small>{project.eyebrow.split(' · ')[0]}</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </span>
+      <span className="product-card-hover">
+        <small>{project.eyebrow}</small>
+        <strong>{project.name}</strong>
+        <span className="product-card-statement">{project.statement}</span>
+        <span className="product-card-hover-outcome">
+          <small>{project.metricLabel}</small>
+          <b>{project.metric}</b>
+        </span>
+        <span className="product-card-hover-link">View live <i aria-hidden="true">↗</i></span>
+      </span>
+    </>
   )
-}
 
-function SilfiraPreview() {
   return (
-    <div className="work-preview work-preview-silfira">
-      <div className="silfira-window">
-        <div className="silfira-nav"><div><span>◈</span><strong>SILFIRA <em>REALTORS</em></strong></div><nav>Home&nbsp;&nbsp;&nbsp; Properties&nbsp;&nbsp;&nbsp; About&nbsp;&nbsp;&nbsp; <b>Contact</b></nav></div>
-        <div className="silfira-hero">
-          <div className="silfira-buildings" aria-hidden="true" />
-          <small>CURATED HOMES · GANDHINAGAR</small>
-          <strong>Discover Your<br /><em>Dream Space</em></strong>
-          <p>Exceptional properties, thoughtfully presented.</p>
-          <div><button type="button" tabIndex="-1">Browse Properties</button><button type="button" tabIndex="-1">Get Valuation</button></div>
-        </div>
-        <div className="silfira-properties">
-          <span>FEATURED PROPERTIES</span>
-          <div><article><i /><strong>Only ONE</strong><small>3 BHK · Sargasan</small></article><article><i /><strong>Atmos by Solaire</strong><small>3–4 BHK · Gandhinagar</small></article><article><i /><strong>Dev Auram</strong><small>2–3 BHK · Palm Road</small></article></div>
-        </div>
-      </div>
-    </div>
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noreferrer"
+      role={duplicate ? undefined : 'listitem'}
+      tabIndex={duplicate ? -1 : undefined}
+      className={cardClassName}
+      aria-label={`View ${project.name} live`}
+    >
+      {content}
+    </a>
   )
-}
-
-function ProjectPreview({ project }) {
-  if (project.id === 'cineflow') return <CineFlowPreview project={project} />
-  if (project.id === 'lexflow') return <LexFlowPreview />
-  return <SilfiraPreview />
 }
 
 export default function Home() {
-  const [activeProject, setActiveProject] = useState(projects[0].id)
-  const selectedProject = projects.find((project) => project.id === activeProject) ?? projects[0]
+  const heroRef = useRef(null)
+  const canvasRef = useRef(null)
+  const workStageRef = useRef(null)
+  const servicesRef = useRef(null)
+
+  const handleCanvasPointerMove = (event) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const bounds = canvas.getBoundingClientRect()
+    canvas.style.setProperty('--hero-spotlight-x', `${event.clientX - bounds.left}px`)
+    canvas.style.setProperty('--hero-spotlight-y', `${event.clientY - bounds.top}px`)
+  }
+
+  const handleWorkPointerMove = (event) => {
+    const stage = workStageRef.current
+    if (!stage) return
+
+    const bounds = stage.getBoundingClientRect()
+    stage.style.setProperty('--work-spotlight-x', `${event.clientX - bounds.left}px`)
+    stage.style.setProperty('--work-spotlight-y', `${event.clientY - bounds.top}px`)
+  }
+
+  useGSAP(() => {
+    const motion = gsap.matchMedia()
+
+    motion.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+      const canvas = canvasRef.current
+      const viewport = canvas?.querySelector('.canvas-main')
+      const track = canvas?.querySelector('.canvas-scroll-track')
+
+      if (!canvas || !viewport || !track) return undefined
+
+      const getTravel = () => Math.max(0, track.scrollHeight - viewport.clientHeight)
+
+      gsap.set(canvas, {
+        '--workflow-progress': '68%',
+        '--playback-progress': 0,
+      })
+      gsap.set('.pulse-chart i', { transformOrigin: 'center bottom' })
+
+      const productFilm = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero-layout',
+          start: 'top 12%',
+          end: '+=760',
+          pin: '.hero-layout',
+          pinSpacing: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+
+      productFilm
+        .to(canvas, { '--playback-progress': 1, duration: 1, ease: 'none' }, 0)
+        .to(canvas, { '--workflow-progress': '100%', duration: 0.24, ease: 'none' }, 0.04)
+        .to('.pulse-chart i', { scaleY: 1.18, stagger: 0.025, duration: 0.22, ease: 'none' }, 0.06)
+        .to('.workflow-node:last-child i', { backgroundColor: '#4f46e5', color: '#ffffff', duration: 0.18 }, 0.2)
+        .to('.canvas-scroll-track', { y: () => -getTravel(), duration: 0.58, ease: 'none' }, 0.3)
+        .to('.note-one', { y: -18, opacity: 0.58, duration: 0.24, ease: 'none' }, 0.43)
+        .to('.note-two', { y: 16, opacity: 0.34, duration: 0.24, ease: 'none' }, 0.43)
+        .fromTo('.launch-check', { x: 16, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.045, duration: 0.22 }, 0.62)
+
+      return () => productFilm.scrollTrigger?.kill()
+    })
+
+    return () => motion.revert()
+  }, { scope: heroRef })
+
+  useGSAP(() => {
+    const motion = gsap.matchMedia()
+
+    motion.add('(prefers-reduced-motion: no-preference)', () => {
+      const pulsePaths = gsap.utils.toArray('.system-pulse')
+
+      pulsePaths.forEach((path) => {
+        const length = path.getTotalLength()
+        gsap.set(path, {
+          strokeDasharray: `${length * 0.2} ${length * 0.8}`,
+          strokeDashoffset: 0,
+        })
+      })
+
+      const riverCurrent = gsap.to('.system-stream', {
+        strokeDashoffset: -36,
+        duration: 1.25,
+        ease: 'none',
+        repeat: -1,
+        scrollTrigger: {
+          trigger: '.service-system',
+          start: 'top bottom',
+          end: 'bottom top',
+          toggleActions: 'play pause resume pause',
+        },
+      })
+
+      const flow = gsap.fromTo(pulsePaths,
+        { strokeDashoffset: 0, opacity: 0.32 },
+        {
+          strokeDashoffset: (_, path) => -path.getTotalLength(),
+          opacity: 1,
+          duration: 2.8,
+          stagger: 0.28,
+          ease: 'none',
+          repeat: -1,
+          repeatDelay: 0.35,
+          scrollTrigger: {
+            trigger: '.service-system',
+            start: 'top bottom',
+            end: 'bottom top',
+            toggleActions: 'play pause resume pause',
+          },
+        },
+      )
+
+      const coreGlow = gsap.to('.system-core', {
+        filter: 'drop-shadow(0 0 18px rgba(96,165,250,.34)) drop-shadow(0 0 30px rgba(167,139,250,.18))',
+        duration: 1.55,
+        ease: 'none',
+        yoyo: true,
+        repeat: -1,
+        scrollTrigger: {
+          trigger: '.service-system',
+          start: 'top bottom',
+          end: 'bottom top',
+          toggleActions: 'play pause resume pause',
+        },
+      })
+
+      return () => {
+        riverCurrent.kill()
+        flow.kill()
+        coreGlow.kill()
+      }
+    })
+
+    return () => motion.revert()
+  }, { scope: servicesRef })
 
   return (
     <div className="home-page">
       <Nav />
 
       <main id="main-content" tabIndex="-1">
-        <section className="home-hero">
+        <section className="home-hero" ref={heroRef}>
           <div className="hero-grid" aria-hidden="true" />
           <div className="hero-glow hero-glow-one" aria-hidden="true" />
           <div className="hero-glow hero-glow-two" aria-hidden="true" />
@@ -275,7 +505,11 @@ export default function Home() {
                 <span className="caption-dot" />
                 From idea to launch
               </div>
-              <div className="product-canvas">
+              <div
+                className="product-canvas"
+                ref={canvasRef}
+                onPointerMove={handleCanvasPointerMove}
+              >
                 <div className="canvas-topbar">
                   <div className="canvas-dots"><i /><i /><i /></div>
                   <div className="canvas-title">WorkAidly / Delivery OS</div>
@@ -290,41 +524,79 @@ export default function Home() {
                     <span><Icon name="monitoring" /></span>
                   </aside>
                   <div className="canvas-main">
-                    <div className="canvas-heading">
-                      <div><small>Product command center</small><strong>Good morning, team.</strong></div>
-                      <div className="canvas-avatar">WA</div>
-                    </div>
-                    <div className="canvas-stats">
-                      <div><small>Product strategy</small><strong>Aligned</strong><span className="status-positive">Ready</span></div>
-                      <div><small>Current sprint</small><strong>04 / Build</strong><span>On track</span></div>
-                      <div><small>Launch status</small><strong>Quality check</strong><span>In review</span></div>
-                    </div>
-                    <div className="workflow-card">
-                      <div className="workflow-title"><span>Connected delivery</span><small>This week</small></div>
-                      <div className="workflow-track" aria-hidden="true">
-                        <div className="workflow-line" />
-                        <div className="workflow-node node-done"><i><Icon name="lightbulb" /></i><span>Strategy</span><small>Complete</small></div>
-                        <div className="workflow-node node-done"><i><Icon name="draw" /></i><span>Design</span><small>Complete</small></div>
-                        <div className="workflow-node node-active"><i><Icon name="code" /></i><span>Build</span><small>In progress</small></div>
-                        <div className="workflow-node"><i><Icon name="rocket_launch" /></i><span>Launch</span><small>Next</small></div>
+                    <div className="canvas-scroll-track">
+                      <div className="canvas-scene canvas-scene-primary">
+                        <div className="canvas-heading">
+                          <div><small>Product command center</small><strong>Good morning, team.</strong></div>
+                          <div className="canvas-avatar">WA</div>
+                        </div>
+                        <div className="canvas-stats">
+                          <div><small>Product strategy</small><strong>Aligned</strong><span className="status-positive">Ready</span></div>
+                          <div><small>Current sprint</small><strong>04 / Build</strong><span>On track</span></div>
+                          <div><small>Launch status</small><strong>Quality check</strong><span>In review</span></div>
+                        </div>
+                        <div className="workflow-card">
+                          <div className="workflow-title"><span>Connected delivery</span><small>This week</small></div>
+                          <div className="workflow-track" aria-hidden="true">
+                            <div className="workflow-line" />
+                            <div className="workflow-node node-done"><i><Icon name="lightbulb" /></i><span>Strategy</span><small>Complete</small></div>
+                            <div className="workflow-node node-done"><i><Icon name="draw" /></i><span>Design</span><small>Complete</small></div>
+                            <div className="workflow-node node-active"><i><Icon name="code" /></i><span>Build</span><small>In progress</small></div>
+                            <div className="workflow-node"><i><Icon name="rocket_launch" /></i><span>Launch</span><small>Next</small></div>
+                          </div>
+                        </div>
+                        <div className="canvas-bottom-row">
+                          <div className="activity-card">
+                            <div className="mini-label">Recent decisions</div>
+                            <p><span className="activity-icon">✓</span> Onboarding flow approved</p>
+                            <p><span className="activity-icon">✓</span> API architecture aligned</p>
+                          </div>
+                          <div className="pulse-card">
+                            <div className="mini-label">Delivery pulse</div>
+                            <div className="pulse-chart" aria-hidden="true">
+                              <i style={{ height: '38%' }} /><i style={{ height: '52%' }} /><i style={{ height: '44%' }} />
+                              <i style={{ height: '72%' }} /><i style={{ height: '64%' }} /><i style={{ height: '88%' }} />
+                              <i style={{ height: '78%' }} />
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="canvas-bottom-row">
-                      <div className="activity-card">
-                        <div className="mini-label">Recent decisions</div>
-                        <p><span className="activity-icon">✓</span> Onboarding flow approved</p>
-                        <p><span className="activity-icon">✓</span> API architecture aligned</p>
-                      </div>
-                      <div className="pulse-card">
-                        <div className="mini-label">Delivery pulse</div>
-                        <div className="pulse-chart" aria-hidden="true">
-                          <i style={{ height: '38%' }} /><i style={{ height: '52%' }} /><i style={{ height: '44%' }} />
-                          <i style={{ height: '72%' }} /><i style={{ height: '64%' }} /><i style={{ height: '88%' }} />
-                          <i style={{ height: '78%' }} />
+
+                      <div className="canvas-scene canvas-scene-launch">
+                        <div className="launch-heading">
+                          <div>
+                            <small>Launch command</small>
+                            <strong>Ready for release.</strong>
+                          </div>
+                          <span><i /> All systems live</span>
+                        </div>
+                        <div className="launch-summary">
+                          <div className="launch-score" aria-hidden="true">
+                            <div><strong>96</strong><small>/ 100</small></div>
+                          </div>
+                          <div>
+                            <small>Release confidence</small>
+                            <strong>Everything is aligned.</strong>
+                            <p>Product, design, and engineering checks are complete for the production handoff.</p>
+                          </div>
+                        </div>
+                        <div className="launch-checks">
+                          <div className="launch-check"><span><Icon name="check_circle" /></span><div><strong>Product experience</strong><small>Final flows approved</small></div><em>Complete</em></div>
+                          <div className="launch-check"><span><Icon name="check_circle" /></span><div><strong>Production build</strong><small>Core journeys verified</small></div><em>Complete</em></div>
+                          <div className="launch-check"><span><Icon name="check_circle" /></span><div><strong>Launch handoff</strong><small>Monitoring connected</small></div><em>Ready</em></div>
+                        </div>
+                        <div className="launch-footer">
+                          <span>Release candidate</span>
+                          <strong>WorkAidly 1.0 <i>Approved</i></strong>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="canvas-playback" aria-hidden="true">
+                  <span>Product film</span>
+                  <i><b /></i>
+                  <strong>Scroll-controlled</strong>
                 </div>
               </div>
               <div className="floating-note note-one">
@@ -349,63 +621,57 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="work-section">
+        <section id="work" className="work-section" aria-labelledby="work-title">
           <div className="home-container">
-            <div className="section-heading work-heading">
-              <div>
-                <span className="section-kicker">Selected work</span>
-                <h2>Proof lives in the <em>product.</em></h2>
-              </div>
-              <p>We connect strategic thinking with careful execution-creating digital products that are useful on day one and adaptable long after.</p>
-            </div>
+            <div
+              className="product-stage"
+              ref={workStageRef}
+              onPointerMove={handleWorkPointerMove}
+            >
+              <div className="product-stage-grid" aria-hidden="true" />
+              <div className="product-stage-glow" aria-hidden="true" />
 
-            <div className="work-showcase">
-              <div className="work-copy">
-                <div className="work-tabs" role="tablist" aria-label="Featured projects">
-                  {projects.map((project) => (
-                    <button
-                      key={project.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={activeProject === project.id}
-                      aria-controls="project-panel"
-                      className={activeProject === project.id ? 'active' : ''}
-                      onClick={() => setActiveProject(project.id)}
-                    >
-                      <span>{project.index}</span>
-                      <strong>{project.name}</strong>
-                      <Icon name={project.icon} />
-                    </button>
-                  ))}
+              <header className="product-stage-heading">
+                <div className="product-stage-kicker">
+                  <span>Selected systems</span>
+                  <i aria-hidden="true" />
+                  <span>{projects.length} live products</span>
                 </div>
+                <h2 id="work-title">Proof lives in the <em>product.</em></h2>
+                <p>Real software, shaped around real work. Explore the systems we have taken from a difficult brief to a dependable product.</p>
+                <div className="product-stage-actions">
+                  <Link to="/products">Explore every product <span aria-hidden="true">↗</span></Link>
+                  <Link to="/contact">Start a project <span aria-hidden="true">→</span></Link>
+                </div>
+              </header>
 
-                <div className="work-description" aria-live="polite">
-                  <span>{selectedProject.eyebrow}</span>
-                  <h3>{selectedProject.statement}</h3>
-                  <div className="work-outcome">
-                    <small>{selectedProject.metricLabel}</small>
-                    <strong>{selectedProject.metric}</strong>
+              <div className="product-orbit" role="list" aria-label="WorkAidly products">
+                <div className="product-orbit-track">
+                  <div className="product-orbit-set">
+                    {projects.map((project) => (
+                      <ProductOrbitCard
+                        key={project.id}
+                        project={project}
+                      />
+                    ))}
                   </div>
-                  <div className="work-links">
-                    <a href={selectedProject.url} target="_blank" rel="noreferrer">View live project <span aria-hidden="true">↗</span></a>
-                    <Link to="/contact">Discuss a similar project <span aria-hidden="true">→</span></Link>
+                  <div className="product-orbit-set product-orbit-set-clone" aria-hidden="true">
+                    {projects.map((project) => (
+                      <ProductOrbitCard
+                        key={`loop-${project.id}`}
+                        project={project}
+                        duplicate
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <div id="project-panel" role="tabpanel" className="work-visual">
-                <ProjectPreview project={selectedProject} />
-                <div className="project-review">
-                  <span aria-hidden="true">“</span>
-                  <blockquote>{selectedProject.review}</blockquote>
-                  <div><strong>{selectedProject.reviewer}</strong><small>{selectedProject.reviewerRole}</small></div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
-        <section className="services-section">
+        <section className="services-section" ref={servicesRef}>
           <div className="home-container">
             <div className="section-heading services-heading">
               <div>
@@ -430,10 +696,36 @@ export default function Home() {
                       <div className="system-node system-node-three"><i />Build</div>
                       <div className="system-node system-node-four"><i />Scale</div>
                       <svg viewBox="0 0 400 210" preserveAspectRatio="none">
-                        <path d="M200 105 C150 105 150 35 78 35" />
-                        <path d="M200 105 C250 105 250 35 322 35" />
-                        <path d="M200 105 C150 105 150 175 78 175" />
-                        <path d="M200 105 C250 105 250 175 322 175" />
+                        <defs>
+                          <linearGradient id="stream-research" x1="78" y1="35" x2="200" y2="105" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stopColor="#5eead4" stopOpacity=".18" />
+                            <stop offset="1" stopColor="#5eead4" stopOpacity="1" />
+                          </linearGradient>
+                          <linearGradient id="stream-design" x1="322" y1="35" x2="200" y2="105" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stopColor="#60a5fa" stopOpacity=".18" />
+                            <stop offset="1" stopColor="#60a5fa" stopOpacity="1" />
+                          </linearGradient>
+                          <linearGradient id="stream-build" x1="78" y1="175" x2="200" y2="105" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stopColor="#a78bfa" stopOpacity=".18" />
+                            <stop offset="1" stopColor="#a78bfa" stopOpacity="1" />
+                          </linearGradient>
+                          <linearGradient id="stream-scale" x1="322" y1="175" x2="200" y2="105" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stopColor="#fbbf24" stopOpacity=".18" />
+                            <stop offset="1" stopColor="#fbbf24" stopOpacity="1" />
+                          </linearGradient>
+                        </defs>
+                        <path className="system-stream-base" d="M78 35 C150 35 150 105 200 105" />
+                        <path className="system-stream-base" d="M322 35 C250 35 250 105 200 105" />
+                        <path className="system-stream-base" d="M78 175 C150 175 150 105 200 105" />
+                        <path className="system-stream-base" d="M322 175 C250 175 250 105 200 105" />
+                        <path className="system-stream system-stream-research" d="M78 35 C150 35 150 105 200 105" />
+                        <path className="system-stream system-stream-design" d="M322 35 C250 35 250 105 200 105" />
+                        <path className="system-stream system-stream-build" d="M78 175 C150 175 150 105 200 105" />
+                        <path className="system-stream system-stream-scale" d="M322 175 C250 175 250 105 200 105" />
+                        <path className="system-pulse system-pulse-research" d="M78 35 C150 35 150 105 200 105" />
+                        <path className="system-pulse system-pulse-design" d="M322 35 C250 35 250 105 200 105" />
+                        <path className="system-pulse system-pulse-build" d="M78 175 C150 175 150 105 200 105" />
+                        <path className="system-pulse system-pulse-scale" d="M322 175 C250 175 250 105 200 105" />
                       </svg>
                     </div>
                   )}

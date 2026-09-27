@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
@@ -12,7 +12,6 @@ const tabs = [
     headline: 'SaaS Development',
     body: 'We architect end-to-end multi-tenant platforms built for scale. From billing & auth to role-based dashboards, our SaaS foundations are engineered to grow with your user base - and your revenue.',
     points: ['Multi-tenant architecture', 'Subscription & billing integration', 'Role-based access control', 'Usage analytics & metering'],
-    stack: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS', 'Docker'],
   },
   {
     id: 'custom',
@@ -21,7 +20,6 @@ const tabs = [
     headline: 'Custom Software',
     body: 'Bespoke applications engineered around your exact operational constraints. We reject generic templates and build precise tools that solve the problem you actually have - not one that fits a pre-packaged solution.',
     points: ['Domain-specific tooling', 'Legacy system modernisation', 'API-first architecture', 'Thorough documentation'],
-    stack: ['Python', 'TypeScript', 'FastAPI', 'React', 'Redis', 'PostgreSQL'],
   },
   {
     id: 'web',
@@ -30,7 +28,6 @@ const tabs = [
     headline: 'Website & Web Apps',
     body: 'From high-conversion landing pages to complex data-driven applications, we create digital experiences that feel intentional and perform flawlessly. Every pixel serves a purpose.',
     points: ['High-conversion landing pages', 'Complex web applications', 'CMS integration', 'Performance-first development'],
-    stack: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'Vercel', 'Sanity'],
   },
   {
     id: 'automation',
@@ -39,7 +36,6 @@ const tabs = [
     headline: 'Automation & Integration',
     body: 'Connect your disparate tools into a single, intelligent workflow. We eliminate manual overhead by orchestrating APIs, webhooks, and data pipelines that run 24/7 without you touching them.',
     points: ['Workflow orchestration', 'Third-party API integration', 'Data pipeline automation', 'Custom webhook systems'],
-    stack: ['n8n', 'Zapier', 'Python', 'Make', 'REST APIs', 'Webhooks'],
   },
   {
     id: 'ai',
@@ -48,9 +44,48 @@ const tabs = [
     headline: 'AI / ML Development',
     body: 'We build intelligent systems that go beyond demos - production-grade AI features embedded into your product. From LLM-powered workflows to custom ML models, we ship AI that actually delivers value.',
     points: ['LLM integration & fine-tuning', 'RAG pipelines', 'ML model development', 'AI-powered automation'],
-    stack: ['OpenAI', 'LangChain', 'Python', 'PyTorch', 'Pinecone', 'HuggingFace'],
   },
 ]
+
+const stackCells = [1, 4, 7, 10, 12, 15, 18, 21, 23, 24, 25, 34, 35, 36, 37, 46, 47, 48, 51, 56, 59, 61, 64, 67, 70]
+
+const stackTechnologies = [
+  { name: 'React', icon: 'hub' },
+  { name: 'Node.js', mark: 'JS' },
+  { name: 'PostgreSQL', icon: 'database' },
+  { name: 'Stripe', mark: 'S' },
+  { name: 'AWS', icon: 'cloud' },
+  { name: 'Docker', icon: 'deployed_code' },
+  { name: 'Python', mark: 'Py' },
+  { name: 'TypeScript', mark: 'TS' },
+  { name: 'FastAPI', icon: 'bolt' },
+  { name: 'Redis', icon: 'layers' },
+  { name: 'Next.js', mark: 'N' },
+  { name: 'Tailwind CSS', icon: 'air' },
+  { name: 'Framer Motion', icon: 'motion_mode' },
+  { name: 'Vercel', icon: 'change_history' },
+  { name: 'Sanity', mark: 'S' },
+  { name: 'n8n', icon: 'schema' },
+  { name: 'Zapier', icon: 'asterisk' },
+  { name: 'Make', icon: 'conversion_path' },
+  { name: 'REST APIs', icon: 'api' },
+  { name: 'Webhooks', icon: 'webhook' },
+  { name: 'OpenAI', icon: 'psychology' },
+  { name: 'LangChain', icon: 'link' },
+  { name: 'PyTorch', icon: 'local_fire_department' },
+  { name: 'Pinecone', icon: 'park' },
+  { name: 'Hugging Face', icon: 'sentiment_satisfied' },
+].map((technology, index) => ({ ...technology, cell: stackCells[index] }))
+
+const stackTechnologyByCell = new Map(stackTechnologies.map((technology) => [technology.cell, technology]))
+
+function StackMark({ technology }) {
+  if (technology.icon) {
+    return <span className="material-symbols-outlined" aria-hidden="true">{technology.icon}</span>
+  }
+
+  return <strong aria-hidden="true">{technology.mark}</strong>
+}
 
 const edge = [
   { icon: 'architecture', title: 'Tailored Solutions', desc: 'No templates. We build specific tools for specific problems.' },
@@ -61,29 +96,75 @@ const edge = [
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState(tabs[0].id)
+  const [dialVisible, setDialVisible] = useState(() => typeof window !== 'undefined' && !('IntersectionObserver' in window))
+  const dialRef = useRef(null)
   const active = tabs.find((t) => t.id === activeTab)
 
+  useEffect(() => {
+    const dial = dialRef.current
+    if (!dial) return undefined
+
+    if (!('IntersectionObserver' in window)) return undefined
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setDialVisible(true)
+        observer.disconnect()
+      }
+    }, { threshold: 0.35 })
+
+    observer.observe(dial)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div id="main-content" className="bg-background text-on-surface font-body">
+    <div id="main-content" className="services-page bg-background text-on-surface font-body">
       <Nav />
 
       {/* Page Hero */}
-      <section className="pt-40 pb-16 px-8">
-        <div className="max-w-7xl mx-auto">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary-container/10 text-primary text-xs font-label tracking-widest font-semibold mb-6">
-            WHAT WE DO
-          </span>
-          <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tight text-on-surface leading-[1.1] mb-4">
-            Our Core Ecosystem
-          </h1>
-          <p className="text-on-surface-variant text-lg font-light max-w-2xl">
-            A focused range of digital services designed for high-impact execution - from product strategy and platform architecture to automation and applied AI.
-          </p>
+      <section className="services-stack-hero" aria-labelledby="services-stack-title">
+        <div className="services-stack-shell">
+          <div className="services-stack-grid" aria-label="Languages, platforms, and tools we work with">
+            {Array.from({ length: 72 }, (_, index) => {
+              const technology = stackTechnologyByCell.get(index)
+              const row = Math.floor(index / 12)
+              const column = index % 12
+              const centerVoid = (row === 2 || row === 3) && column >= 2 && column <= 9
+
+              if (!technology) {
+                return <span key={index} className={`services-stack-tile services-stack-tile-empty ${centerVoid ? 'is-center' : ''}`} aria-hidden="true" />
+              }
+
+              return (
+                <div
+                  key={technology.name}
+                  className="services-stack-tile services-stack-logo"
+                  data-name={technology.name}
+                  aria-label={technology.name}
+                  title={technology.name}
+                >
+                  <StackMark technology={technology} />
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="services-stack-copy">
+            <span>Languages · platforms · delivery</span>
+            <h1 id="services-stack-title">One team for your <em>whole stack.</em></h1>
+            <p>From interface to infrastructure and applied AI, we choose tools around the product—not the other way around.</p>
+            <Link to="#service-catalog">Explore our services <span aria-hidden="true">↓</span></Link>
+          </div>
+
+          <div className="services-stack-count" aria-hidden="true">
+            <span>{stackTechnologies.length}</span>
+            <small>technologies<br />one delivery system</small>
+          </div>
         </div>
       </section>
 
       {/* ── SECTION 1: Tabbed Services Panel ── */}
-      <section className="py-16 px-8 bg-surface-container-lowest">
+      <section id="service-catalog" className="py-20 px-8 bg-surface-container-lowest">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-0 rounded-3xl overflow-hidden shadow-lg border border-outline-variant/20">
 
@@ -126,22 +207,6 @@ export default function Services() {
                 ))}
               </ul>
 
-              {/* Tech Stack */}
-              <div>
-                <p className="text-xs font-label uppercase tracking-widest text-on-surface-variant mb-4">Tech Stack</p>
-                <div className="flex flex-wrap gap-3">
-                  {active.stack.map((label) => (
-                    <div
-                      key={label}
-                      className="flex items-center gap-2.5 px-4 py-2.5 bg-surface-container-low rounded-full border border-outline-variant/20 hover:border-primary/30 hover:bg-primary/5 transition-all"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/70 shadow-[0_0_0_4px_rgba(79,70,229,0.08)]" aria-hidden="true" />
-                      <span className="text-xs font-semibold text-on-surface">{label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 mt-10 px-6 py-3 bg-primary text-on-primary rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all"
@@ -171,16 +236,22 @@ export default function Services() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-primary/5 rounded-[4rem] p-12 aspect-square flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                  <svg className="w-full h-full" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" fill="none" r="40" stroke="currentColor" strokeDasharray="2 2" strokeWidth="0.1" />
-                    <circle cx="50" cy="50" fill="none" r="30" stroke="currentColor" strokeWidth="0.1" />
-                  </svg>
-                </div>
-                <div className="text-center">
-                  <span className="text-7xl font-headline font-extrabold text-primary block mb-2">99%</span>
-                  <span className="text-on-surface-variant uppercase font-label tracking-widest text-xs">Uptime &amp; Reliability</span>
+              <div
+                ref={dialRef}
+                className={`edge-reliability-dial aspect-square rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] ${dialVisible ? 'is-visible' : ''}`}
+                role="img"
+                aria-label="99 percent uptime and reliability"
+              >
+                <svg className="edge-reliability-rings" viewBox="0 0 100 100" aria-hidden="true">
+                  <circle className="edge-dial-track edge-dial-track-outer" cx="50" cy="50" r="42" pathLength="100" />
+                  <circle className="edge-dial-ring edge-dial-ring-outer" cx="50" cy="50" r="42" pathLength="100" strokeDasharray="96.5 100" />
+                  <circle className="edge-dial-track edge-dial-track-inner" cx="50" cy="50" r="32.5" pathLength="100" />
+                  <circle className="edge-dial-ring edge-dial-ring-inner" cx="50" cy="50" r="32.5" pathLength="100" strokeDasharray="96.5 100" />
+                </svg>
+
+                <div className="edge-reliability-copy" aria-hidden="true">
+                  <span className="edge-reliability-value">99<span>%</span></span>
+                  <span className="edge-reliability-label">Uptime &amp; Reliability</span>
                 </div>
               </div>
             </div>
