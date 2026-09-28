@@ -3,12 +3,12 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
 const steps = [
-  { icon: 'search', title: 'Discover', sub: 'Audit & Scope', desc: 'We start by deeply understanding your current state - auditing your existing systems, workflows, and pain points to scope the right engagement.' },
-  { icon: 'forum', title: 'Understand', sub: 'Strategy Alignment', desc: 'Through structured sessions, we align on your goals, constraints, and success metrics. Strategy before execution.' },
-  { icon: 'edit_note', title: 'Plan', sub: 'Architecture', desc: 'We design the technical architecture and project roadmap, breaking work into clear, deliverable milestones.' },
-  { icon: 'palette', title: 'Design', sub: 'Visual & UX', desc: 'Pixel-perfect interfaces grounded in user research. We design experiences that feel intuitive and intentional.' },
-  { icon: 'rocket_launch', title: 'Build', sub: 'Engineering', desc: 'Clean, documented, maintainable code. We build fast without cutting corners - tested and reviewed at every step.' },
-  { icon: 'support_agent', title: 'Support', sub: 'Lifecycle Growth', desc: "Post-launch isn't the end. We provide ongoing support, monitoring, and iterative improvements as your product scales." },
+  { title: 'Discover', output: 'Discovery brief', desc: 'Align on goals, users and success.', artifact: 'brief' },
+  { title: 'Understand', output: 'Workflow map', desc: 'Turn research into a shared plan.', artifact: 'research' },
+  { title: 'Plan', output: 'Architecture plan', desc: 'Design the right structure to scale.', artifact: 'architecture' },
+  { title: 'Design', output: 'Design system', desc: 'Create a consistent, flexible foundation.', artifact: 'design' },
+  { title: 'Build', output: 'Working product', desc: 'Ship real software early and iterate.', artifact: 'build' },
+  { title: 'Support', output: 'Release & learn', desc: 'Launch, measure and keep improving.', artifact: 'release' },
 ]
 
 const principles = [
@@ -17,6 +17,64 @@ const principles = [
   { icon: 'sync', title: 'Iterative by Design', desc: 'Every project is built to evolve. We structure work in phases that deliver value incrementally.' },
   { icon: 'handshake', title: 'True Partnership', desc: "We treat your project as if it's our own. Your success metrics are our success metrics." },
 ]
+
+function ProcessArtifact({ type }) {
+  if (type === 'brief') {
+    return (
+      <div className="delivery-artifact delivery-artifact-brief" aria-hidden="true">
+        <i /><i /><div><strong>Project brief</strong><span /><span /><span /><b /></div>
+      </div>
+    )
+  }
+
+  if (type === 'research') {
+    return (
+      <div className="delivery-artifact delivery-artifact-research" aria-hidden="true">
+        <div className="research-top"><strong>User insights</strong><span>⌕</span></div>
+        <div className="research-data"><div className="research-bars"><i /><i /><i /><i /></div><b>72<small>%</small></b></div>
+        <div className="research-row"><i /><span>User needs</span><b /></div>
+        <div className="research-row"><i /><span>Jobs to be done</span><b /></div>
+      </div>
+    )
+  }
+
+  if (type === 'architecture') {
+    return (
+      <div className="delivery-artifact delivery-artifact-architecture" aria-hidden="true">
+        <strong>System architecture</strong>
+        <div className="architecture-map"><span /><span /><span /><span /><span /><i /><i /><i /></div>
+      </div>
+    )
+  }
+
+  if (type === 'design') {
+    return (
+      <div className="delivery-artifact delivery-artifact-design" aria-hidden="true">
+        <strong>Design tokens</strong>
+        <div className="token-row"><i /><i /><i /><i /><i /><b>Aa</b></div>
+        <small>UI components</small>
+        <div className="component-row"><span>Button</span><i /><b /></div>
+      </div>
+    )
+  }
+
+  if (type === 'build') {
+    return (
+      <div className="delivery-artifact delivery-artifact-build" aria-hidden="true">
+        <div className="build-sidebar"><b>W</b><i /><i /><i /><i /></div>
+        <div className="build-canvas"><small>Working build</small><strong>Turn work<br />into progress</strong><span /><span /><div><i /><b /></div></div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="delivery-artifact delivery-artifact-release" aria-hidden="true">
+      <div className="release-top"><strong>Live & learning</strong><span><i /> Live</span></div>
+      <div className="release-chart"><svg viewBox="0 0 180 64" preserveAspectRatio="none"><path d="M2 56 C22 35 34 54 54 42 S83 38 99 29 S128 36 145 18 S164 22 178 4" /></svg><b>+42%</b></div>
+      <div className="release-stats"><span><small>Users</small>12.4K</span><span><small>Activation</small>68%</span><span><small>Rating</small>4.8</span></div>
+    </div>
+  )
+}
 
 export default function Process() {
   return (
@@ -38,29 +96,36 @@ export default function Process() {
         </div>
       </section>
 
-      {/* Thread Steps */}
-      <section className="py-16 px-8 bg-surface-container-low/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative">
-            <div className="hidden lg:block absolute top-8 left-8 right-8 h-px border-t border-dashed border-primary/30 -z-10" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {steps.map(({ icon, title, sub, desc }, i) => (
-                <div key={title} className="relative flex flex-col group">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full bg-white shadow-lg border border-primary/10 flex items-center justify-center z-10 group-hover:scale-110 transition-transform shrink-0">
-                      <span className="material-symbols-outlined text-primary">{icon}</span>
-                    </div>
-                    <div>
-                      <span className="text-xs text-on-surface-variant uppercase tracking-widest font-label block mb-1">Step {i + 1}</span>
-                      <h3 className="font-bold text-lg leading-tight">{title}</h3>
-                      <p className="text-xs text-primary font-medium uppercase tracking-wider">{sub}</p>
-                    </div>
-                  </div>
-                  <p className="text-on-surface-variant text-sm font-light leading-relaxed pl-20">{desc}</p>
+      {/* Connected delivery map */}
+      <section className="delivery-map-wrap" aria-labelledby="delivery-map-title">
+        <div className="delivery-map">
+          <header className="delivery-map-heading">
+            <span>The WorkAidly process</span>
+            <h2 id="delivery-map-title">Six stages. One team.<br /><em>No handoff gaps.</em></h2>
+          </header>
+
+          <div className="delivery-map-canvas">
+            <svg className="delivery-connections" viewBox="0 0 1200 640" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M125 152 C205 152 175 415 270 415" />
+              <path d="M350 415 C430 415 395 165 485 165" />
+              <path d="M565 165 C645 165 620 435 710 435" />
+              <path d="M790 435 C865 435 835 155 925 155" />
+              <path d="M1005 155 C1080 155 1055 420 1150 420" />
+            </svg>
+
+            {steps.map((step, index) => (
+              <article key={step.title} className={`delivery-node delivery-node-${index + 1}`}>
+                <ProcessArtifact type={step.artifact} />
+                <div className="delivery-node-copy">
+                  <span>{String(index + 1).padStart(2, '0')} · {step.title}</span>
+                  <h3>{step.output}</h3>
+                  <p>{step.desc}</p>
                 </div>
-              ))}
-            </div>
+              </article>
+            ))}
           </div>
+
+          <p className="delivery-map-closing">The same product team stays close from the first question to the first release — and the next one.</p>
         </div>
       </section>
 
